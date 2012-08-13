@@ -1,6 +1,5 @@
 #AuxiPunk
-   
-<br/>
+
 
 ##What is it?
 * AuxiPunk is an auxiliary AS3 library built on top of [FlashPunk](https://github.com/Draknek/FlashPunk "FlashPunk") (**Auxliary** [additional] **Punk** or **Auxilium** [assistance] **Punk**).   
