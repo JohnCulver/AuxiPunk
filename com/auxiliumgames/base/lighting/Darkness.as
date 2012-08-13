@@ -31,7 +31,7 @@ package com.auxiliumgames.base.lighting {
 		override public function update():void {
 			this.x = FP.camera.x;
 			this.y = FP.camera.y;
-			collideInto("light", x, y, into);
+			collideInto(Light.TYPE, x, y, into);
 		}
 		
 		override public function render():void {

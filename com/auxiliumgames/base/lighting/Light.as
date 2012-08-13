@@ -8,10 +8,10 @@ package com.auxiliumgames.base.lighting {
 	 */
 	public class Light extends Entity{
 		private var _image:Image;
-		
+		public static var TYPE:String = "light";
 		public function Light(image:Image) {
 			_image = image;
-			type = "light";
+			type = Light.TYPE;
 			_image.blend = BlendMode.ERASE;
 			setHitboxTo(image);
 			centerOrigin();
