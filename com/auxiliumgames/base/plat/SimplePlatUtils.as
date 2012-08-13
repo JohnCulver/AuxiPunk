@@ -5,7 +5,7 @@ package com.auxiliumgames.base.plat {
 	 * ...
 	 * @author jculver
 	 */
-	public class SimplePlat {
+	public class SimplePlatUtils {
 		
 		//"Physics" lol
 		//gravity, (additive)
@@ -18,13 +18,14 @@ package com.auxiliumgames.base.plat {
 		public static const WALLFRICTION:Number = 1;
 		//close enough to zero that we can consider it 0
 		public static const CLOSENOUGHTOZERO:Number = .05;
+		//what is the type to check against for walls?
+		public static const WALL:String = "wall";
+		//what is the type to check against for one wat platforms?
+		public static const ONEWAYPLATFORM:String = "onewayplatform";
 		
-		static public const WALL:String = "wall";
-		static public const ONEWAYPLATFORM:String = "onewayplatform";
 		
 		
-		
-		public function SimplePlat() {
+		public function SimplePlatUtils() {
 			
 		}
 		

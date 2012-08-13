@@ -35,12 +35,10 @@ public class PlatformerLevelTestObjectHandler {
 
     private function addEntityToList(child:XML):void {
         if (child.@type == 'Player') {
-			var light:Light = new Light(new Image(TEXTURES.LIGHT));
-            var p:PlatDude = new PlatDude(light);
+            var p:PlatDude = new PlatDude();
             p.x = child.@x;
             p.y = child.@y;
             ents.push(p);
-			ents.push(light);
         }
     }
 

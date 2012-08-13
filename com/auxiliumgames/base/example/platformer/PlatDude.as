@@ -1,41 +1,45 @@
 package com.auxiliumgames.base.example.platformer {
-import assets.snd.SOUNDS;
-import com.auxiliumgames.base.example.assets.tex.TEXTURES;
+	import com.auxiliumgames.base.example.assets.snd.SOUNDS;
+	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.example.LightWorldExample;
 	import com.auxiliumgames.base.Globals;
 	import com.auxiliumgames.base.lighting.Light;
 	import com.auxiliumgames.base.plat.AbstPlatformerPlayer;
+	import com.auxiliumgames.base.plat.PlatformerInput;
+	import com.auxiliumgames.base.plat.PlatformerPositionManger;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	
 	/**
 	 * ...
 	 * @author jculver
 	 */
-	public class PlatDude extends AbstPlatformerPlayer{
+	public class PlatDude extends Entity{
 		
 		private var image:Spritemap = new Spritemap(TEXTURES.DUDE, 36, 36);
-		private var jo:Number;
-		private var light:Light;
+		private var positionManager:PlatformerPositionManger;
+		private var input:PlatformerInput;
 		
-		public function PlatDude(light:Light = null) {
-			this.light = light;
+		public function PlatDude() {
 			graphic = image;
 			image.add("rest", [0]);
 			image.add("move", [1]);
 			image.add("jump", [2]);
 			image.play("rest");
-			type = "physical";
 			
-			edtJumpVelocity( -14);
-			edtMaxMoveVelocity(8, 15);
-			edtMoveAccel(2);
-			edtAirJumps(4);
-			edtCanAirJumpWhileFalling(true);
-			//edtJumpOomf(-.3); //.25
+			positionManager = new PlatformerPositionManger();
+			input = new PlatDudeInput();
+			
+			positionManager.setJumpVelocity( -14);
+			positionManager.setMaxMoveVelocity(8, 15);
+			positionManager.setMoveAccel(2);
+			positionManager.setAirJumps(4);
+			positionManager.setCanAirJumpWhileFalling(true);
+			//setJumpOomf(-.3); //.25
 			
 			centerOrigin();
 			image.centerOrigin();
@@ -52,55 +56,58 @@ import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 		
 		override public function update():void {
 			if (Globals.STATE == Globals.STATE_PLAY) {
-				updatePosition();
-				if (light) {
-					light.x = this.x;
-					light.y = this.y;
-				}
+				positionManager.updatePosition(this, input);
 				updateAnimation();
 				setCamera();
 			}
-            if(isCurrentlyOnGround && abstPressedJump())
+            if(positionManager.onGround && input.pressedJump())
                 SOUNDS.JUMP.play(1);
 			super.update();
 		}
 		
 		private function updateAnimation():void {
-			if (!isCurrentlyOnGround) {
+			if (!positionManager.onGround) {
 				image.play("jump");
-				
-				image.angle += ((v.x > 0) ? -.5 : ((v.x == 0) ? 0 : .5));
+				image.angle += ((positionManager.v.x > 0) ? -.5 : ((positionManager.v.x == 0) ? 0 : .5));
 			}
 			else {
 				image.angle = 0;
-				if (v.x != 0){
-					if(abstPressingLeft() || abstPressingRight())
+				if (positionManager.v.x != 0){
+					if(input.pressingRight() || input.pressingLeft())
 						image.play("move");
 					else
 						image.play("rest");
-					image.flipped = v.x > 0;
+					image.flipped = positionManager.v.x > 0;
 				}
 				else
 					image.play("rest");
 			}
 				
 		}
-		
-		override protected function abstPressedJump():Boolean {
-			return Input.pressed(Key.Z);
-		}
-		
-		override protected function abstHoldingJump():Boolean {
-			return Input.check(Key.Z);
-		}
-		
-		override protected function abstPressingLeft():Boolean {
-			return Input.check(Key.LEFT);
-		}
-		
-		override protected function abstPressingRight():Boolean {
-			return Input.check(Key.RIGHT);
-		}
 	}
 
+}
+
+import com.auxiliumgames.base.plat.PlatformerInput;
+import net.flashpunk.utils.Input;
+import net.flashpunk.utils.Key;
+class PlatDudeInput implements PlatformerInput{
+	
+	/* INTERFACE com.auxiliumgames.base.plat.PlatformerInput */
+	
+	public function pressingRight():Boolean {
+		return Input.check(Key.RIGHT);
+	}
+	
+	public function pressingLeft():Boolean {
+		return Input.check(Key.LEFT);
+	}
+	
+	public function pressedJump():Boolean {
+		return Input.pressed(Key.Z);
+	}
+	
+	public function holdingJump():Boolean {
+		return Input.check(Key.Z);
+	}
 }

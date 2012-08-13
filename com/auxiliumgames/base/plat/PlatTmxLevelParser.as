@@ -41,7 +41,7 @@ public class PlatTmxLevelParser {
         var xml:XML = FP.getXML(tmxFile);
 
         var wallXML:XML = xml.layer[Globals.TLAYER_WALL];
-        wall = new Wall(SimplePlat.WALL,wallXML.@width,wallXML.@height,wallXML.data);
+        wall = new Wall(SimplePlatUtils.WALL,wallXML.@width,wallXML.@height,wallXML.data);
 
         var tileXML:XML = xml.layer[Globals.TLAYER_TILES];
         tiles = new Tiles(tileXML.@width,tileXML.@height,tileXML.data,TEXTURES.BLOCK);
