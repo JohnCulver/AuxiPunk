@@ -1,5 +1,4 @@
 package com.auxiliumgames.base.example.shmup {
-	import com.auxiliumgames.base.example.Tiles;
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	/**
@@ -15,8 +14,6 @@ package com.auxiliumgames.base.example.shmup {
 			dude.x = 40;
 			dude.y = 200;
 			add(dude);
-			//FP.console.enable();
-			add(new Tiles());
 		}
 		
 	}

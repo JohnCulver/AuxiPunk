@@ -1,7 +1,6 @@
 package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.Globals;
-	import com.auxiliumgames.base.shmup.AbstShmupPlayer;
 	import com.auxiliumgames.base.shmup.ShmupInput;
 	import com.auxiliumgames.base.shmup.ShmupPositionManager;
 	import net.flashpunk.Entity;
