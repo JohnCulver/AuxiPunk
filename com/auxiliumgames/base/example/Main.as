@@ -2,11 +2,11 @@ package com.auxiliumgames.base.example{
 import com.auxiliumgames.base.example.platformer.PlatFormerTestWorld;
 import com.auxiliumgames.base.example.platformer.PlatformerLevelTestWorld;
 import com.auxiliumgames.base.example.shmup.BulletHelperTestWorld;
-	import com.auxiliumgames.base.example.shmup.ShmupTestWorld;
-	import com.auxiliumgames.base.Globals;
-	import flash.events.Event;
-	import net.flashpunk.Engine;
-	import net.flashpunk.FP;
+import com.auxiliumgames.base.example.shmup.ShmupTestWorld;
+import com.auxiliumgames.base.Globals;
+import flash.events.Event;
+import net.flashpunk.Engine;
+import net.flashpunk.FP;
 import net.flashpunk.utils.Input;
 import net.flashpunk.utils.Key;
 

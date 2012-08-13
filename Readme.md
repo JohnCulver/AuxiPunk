@@ -13,6 +13,6 @@
  * screen partitioning 
  * a few other random things that get reused frequently
 
-AuxiPunk is built on top of [FlashPunk](https://github.com/Draknek/FlashPunk "FlashPunk"). The FlashPunk license can be found by [Clicking Here](https://github.com/Draknek/FlashPunk/blob/master/license.txt "FlashPunk License)
+AuxiPunk is built on top of [FlashPunk](https://github.com/Draknek/FlashPunk "FlashPunk"). The FlashPunk license can be found by [Clicking Here](https://github.com/Draknek/FlashPunk/blob/master/license.txt "FlashPunk License")
 
 

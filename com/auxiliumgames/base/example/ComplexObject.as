@@ -1,4 +1,4 @@
-package com.auxiliumgames.base.example {
+ackage com.auxiliumgames.base.example {
 	/**
 	 * ...
 	 * @author hi
