@@ -40,12 +40,6 @@ package com.auxiliumgames.base.plat {
 		}
 		
 		private function calcVelocity(input:PlatformerInput):void {
-
-			//currentlyGrounded = _v.y == 0; //TODO this should be done in the same way
-			                               //that currently against wall is done
-										   //also the way applyVelocity is called
-										   //after this method and then in this method we rely on 
-										   //things calced in there is weird...
 			
 			var left:Boolean = input.pressingLeft();
 			var right:Boolean = input.pressingRight();
