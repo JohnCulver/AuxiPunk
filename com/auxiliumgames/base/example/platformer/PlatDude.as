@@ -4,7 +4,6 @@ package com.auxiliumgames.base.example.platformer {
 	import com.auxiliumgames.base.example.LightWorldExample;
 	import com.auxiliumgames.base.Globals;
 	import com.auxiliumgames.base.lighting.Light;
-	import com.auxiliumgames.base.plat.AbstPlatformerPlayer;
 	import com.auxiliumgames.base.plat.PlatformerInput;
 	import com.auxiliumgames.base.plat.PlatformerPositionManger;
 	import flash.geom.Point;

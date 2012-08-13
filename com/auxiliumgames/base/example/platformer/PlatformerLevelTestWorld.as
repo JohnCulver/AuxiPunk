@@ -29,11 +29,6 @@ public class PlatformerLevelTestWorld extends World{
         var oParser:PlatformerLevelTestObjectHandler = new PlatformerLevelTestObjectHandler();
         oParser.parse(objects);
         oParser.add(this);
-		//var light:Light = new Light(new Image(TEXTURES.LIGHT));
-		//light.x = 500;
-		//light.y = 500;
-		//add(light);
-		//add(new Darkness(0x000000,.9,5));
     }
 
     

@@ -1,5 +1,4 @@
 package com.auxiliumgames.base.example{
-import com.auxiliumgames.base.example.platformer.PlatFormerTestWorld;
 import com.auxiliumgames.base.example.platformer.PlatformerLevelTestWorld;
 import com.auxiliumgames.base.example.shmup.BulletHelperTestWorld;
 import com.auxiliumgames.base.example.shmup.ShmupTestWorld;
@@ -16,9 +15,9 @@ import net.flashpunk.utils.Key;
 	 */
 	[Frame(factoryClass="com.auxiliumgames.base.Preloader")]
     [SWF(width="900", height="900")]
-	public class Main extends Engine {
+	public class ExampleMain extends Engine {
 
-		public function Main():void {
+		public function ExampleMain():void {
 			var width:int = Globals.SCREENWIDTH;
 			var height:int = Globals.SCREENHEIGHT;
 			super(width, height, 30, false);
@@ -28,9 +27,8 @@ import net.flashpunk.utils.Key;
 
 		private function go(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			//FP.world = new ShmupTestWorld();
-			//FP.world = new PlatFormerTestWorld(); //TODO this is no longer relevant
-			FP.world = new PlatformerLevelTestWorld();
+			FP.world = new ShmupTestWorld();
+			//FP.world = new PlatformerLevelTestWorld();
 			//FP.world = new BulletHelperTestWorld();
           //FP.world = new SpawnExampleWorld();
             //FP.world = new PartitionExampleWorld();

@@ -1,7 +1,7 @@
 package com.auxiliumgames.base.example {
-	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.Globals;
-import com.auxiliumgames.base.plat.SimplePlat;
+import com.auxiliumgames.base.example.assets.tex.TEXTURES;
+import com.auxiliumgames.base.Globals;
+import com.auxiliumgames.base.plat.SimplePlatUtils;
 
 import net.flashpunk.Entity;
 import net.flashpunk.FP;
@@ -15,8 +15,6 @@ import net.flashpunk.graphics.Tilemap;
 		private var tiles:Tilemap;
 		private var g:Grid;
 
-        [Embed(source = '/com/auxiliumgames/base/example/assets/levels/example.tmx', mimeType = 'application/octet-stream')]private const LEVEL:Class;
-
 		public function Tiles() {
 			tiles = new Tilemap(TEXTURES.BLOCK, Globals.COLUMNS * Globals.UNIT, Globals.ROWS * Globals.UNIT, Globals.UNIT, Globals.UNIT);
 			g = new Grid(Globals.COLUMNS * Globals.UNIT, Globals.ROWS * Globals.UNIT, Globals.UNIT, Globals.UNIT);
@@ -28,7 +26,7 @@ import net.flashpunk.graphics.Tilemap;
 //
 //			var s:String = tiles.saveToString();
 //			g.loadFromString(s);
-            var xmL:XML = FP.getXML(LEVEL);
+
             
 			mask = g;
 
@@ -36,7 +34,7 @@ import net.flashpunk.graphics.Tilemap;
 			graphic = tiles;
 			layer = Globals.LAYER_WALL;
 			
-			type = SimplePlat.WALL;
+			type = SimplePlatUtils.WALL;
 		}
 		
 	}

@@ -53,7 +53,7 @@ package com.auxiliumgames.base{
 		}
 		
 		private function startup():void {
-			var mainClass:Class = getDefinitionByName("com.auxiliumgames.base.example.Main") as Class;
+			var mainClass:Class = getDefinitionByName("com.auxiliumgames.base.example.ExampleMain") as Class;
 			addChild(new mainClass() as DisplayObject);
 		}
 		
