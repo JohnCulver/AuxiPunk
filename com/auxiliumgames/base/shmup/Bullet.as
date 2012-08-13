@@ -25,7 +25,7 @@ package com.auxiliumgames.base.shmup
 			this.layer = Globals.LAYER_BULLET;
 		}
 		
-		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, whenIamDead:Function, image:Image, hitBox:Rectangle, color:uint =0xFFFFFF, type:String = "bullet"):void {
+		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, whenIamDead:Function, image:Image, hitBox:Rectangle, type:String = "bullet"):void {
 			x = startx;
 			y = starty;
 			this.updateMyLocation = updateMyLocation;
@@ -33,7 +33,6 @@ package com.auxiliumgames.base.shmup
 			this.whenIamDead = whenIamDead;
 			this.image = image;
 			setHitboxTo(hitBox);
-			this.image.color = color;
 			this.type = type;
 			this.graphic = image;
 			forcedToBeClear = false;

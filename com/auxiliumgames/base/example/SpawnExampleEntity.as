@@ -8,7 +8,7 @@
 package com.auxiliumgames.base.example {
 import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 import com.auxiliumgames.base.Globals;
-import com.auxiliumgames.base.spawn.ISpawn;
+import com.auxiliumgames.base.spawn.SpawnableEntity;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import net.flashpunk.Entity;
@@ -18,7 +18,7 @@ import net.flashpunk.utils.Input;
 
 
 
-public class SpawnExampleEntity extends Entity implements ISpawn{
+public class SpawnExampleEntity extends SpawnableEntity{
     private var onComplete:Function;
 	private var exploding:uint;
 
@@ -31,7 +31,7 @@ public class SpawnExampleEntity extends Entity implements ISpawn{
 		layer = Globals.LAYER_BULLET + 2;
     }
 
-    public function spawn(onComplete:Function, l:Point):void {
+    override public function spawn(onComplete:Function, l:Point):void {
         this.onComplete = onComplete;
 		exploding = 0;
         x = l.x;
@@ -55,7 +55,7 @@ public class SpawnExampleEntity extends Entity implements ISpawn{
 	}
 	
 	
-	public function forceComplete():void {
+	override public function forceComplete():void {
 		trace("SPLODE");
 		exploding = 30;
 	}

@@ -38,7 +38,7 @@ package com.auxiliumgames.base.example.shmup {
 			}
 			
 			BulletHelper.addFire("ring1", bcs);
-			BulletHelper.fire("ring1", 200, 200);
+			BulletHelper.fire("ring1", this, 200, 200);
 			
 			var inc:Number = 15;
 			var count:Number = 13;
@@ -56,7 +56,7 @@ package com.auxiliumgames.base.example.shmup {
 				bcs2.push(bc2);
 			}
 			BulletHelper.addFire("arc1", bcs2);
-			BulletHelper.fire("arc1", 200, 200, 0xFF0000);
+			BulletHelper.fire("arc1", this,  200, 200, 0xFF0000);
 			
 		}
 		

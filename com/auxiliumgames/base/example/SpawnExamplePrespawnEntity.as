@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.spawn.ISpawn;
+	import com.auxiliumgames.base.spawn.SpawnableEntity;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
@@ -8,7 +8,7 @@ package com.auxiliumgames.base.example {
 	 * ...
 	 * @author hi
 	 */
-	public class SpawnExamplePrespawnEntity extends Entity implements ISpawn{
+	public class SpawnExamplePrespawnEntity extends SpawnableEntity{
 		private var onComplete:Function;
 		private var image:Image;
 		private var lifeTime:Number;
@@ -18,14 +18,14 @@ package com.auxiliumgames.base.example {
 			graphic = image;
 		}
 		
-		public function spawn(onComplete:Function, l:Point):void {
+		override public function spawn(onComplete:Function, l:Point):void {
 			this.onComplete = onComplete;
 			x = l.x;
 			y = l.y;
 			lifeTime = 50;
 		}
 		
-		public function forceComplete():void {
+		override public function forceComplete():void {
 			onComplete();
 		}
 		

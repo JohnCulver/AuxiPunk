@@ -26,7 +26,7 @@ package com.auxiliumgames.base {
 			this.dwidth = width;
 			this.dborderWidth = borderWidth;
 			this.layer = layer;
-			text = new Text("lol");
+			text = new Text("");
 			text.color = textColor;
 			bg = new Image(new BitmapData(width, height, false, bgColor));
 			topBorder = new Image(new BitmapData(width, dborderWidth, false, borderColor));

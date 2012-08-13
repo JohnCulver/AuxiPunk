@@ -27,7 +27,7 @@ package com.auxiliumgames.base.example {
 			light1.x = 100; 
 			light1.y = 250;
 			add(light1);
-			FP.screen.color = 0xFF0000;
+			FP.screen.color = 0xFFFFFF;
 			FP.console.enable();
 		}
 		

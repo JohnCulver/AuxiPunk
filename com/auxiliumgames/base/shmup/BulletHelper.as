@@ -11,7 +11,7 @@ package com.auxiliumgames.base.shmup {
 		
 		
 		private static var configs:Dictionary = new Dictionary();
-		private static const pool:CappedObjectPool = new CappedObjectPool(newBullet, null, Globals.ETC_ESTIMATED_MAX_BULLETS,Globals.ETC_ESTIMATED_MAX_BULLETS);
+		private static const pool:CappedObjectPool = new CappedObjectPool(newBullet, null, Globals.ETC_ESTIMATED_MAX_BULLETS);
 		private static var checkInBullet:Function = function(b:Bullet,world:World):void { pool.checkIn(b); world.remove(b) } ;
 		
 		public function BulletHelper() {
@@ -56,7 +56,7 @@ package com.auxiliumgames.base.shmup {
 			return new Bullet();
 		}
 		
-		public static function fire(fireName:String, startx:Number, starty:Number, color:int = 0xFFFFFFF, putInto:Vector.<Bullet> =null ):void {
+		public static function fire(fireName:String, world:World, startx:Number, starty:Number, color:int = 0xFFFFFFF, putInto:Vector.<Bullet> =null ):void {
 			var bcs:Vector.<BulletConfig> = configs[fireName] as Vector.<BulletConfig>;
 			if (bcs == null)
 				return;
@@ -64,8 +64,8 @@ package com.auxiliumgames.base.shmup {
 				var b:Bullet = pool.checkOut() as Bullet;
 				if (b != null) {
 					var bc:BulletConfig = bcs[i] as BulletConfig;
-					b.spawn(startx, starty, bc.updateMyLocation, bc.amIdead, checkInBullet, bc.image, bc.hb, color, bc.type);
-					bc.world.add(b);
+					b.spawn(startx, starty, bc.updateMyLocation, bc.amIdead, checkInBullet, bc.image, bc.hb, bc.type);
+					world.add(b);
 					if (putInto != null)
 						putInto.push(b);
 				}

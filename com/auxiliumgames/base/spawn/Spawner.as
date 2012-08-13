@@ -36,22 +36,22 @@ package com.auxiliumgames.base.spawn {
 		/**
 		 * Creates a new spawner:
 		 * @param	world   				the world we will add too/remove from
-		 * @param	createNew				the method we call to create a new entity that we will be spawning (this should return a ? extends Entity, implements ISpawn)
+		 * @param	createNew				the method we call to create a new entity that we will be spawning (this should return a SpawnableEntity)
 		 * @param	entityType				the type of the entities we will be spawning (used for clearing)
-		 * @param	poolSize				the initial size of the pool, the pool can grow 2* it's size before returning nulls
-		 * @param	createNewPreSpawner		the function that will be called to crate a new prespawner (this should return a ? extends Entity, implements ISpawn)
+		 * @param	poolSize				the initial size of the pool
+		 * @param	createNewPreSpawner		the function that will be called to crate a new prespawner (this should return a SpawnableEntity)
 		 * @param	preSpawnerTime			the time the prespawner gets spawned before the spawner
 		 */
-		public function Spawner(world:World,createNew:Function,entityType:String, poolSize:uint = 100, createNewPreSpawner:Function = null,preSpawnerTime:uint = 1) {
+		public function Spawner(world:World, createNew:Function, entityType:String, poolSize:uint = 100, createNewPreSpawner:Function = null, preSpawnerTime:uint = 1) {
 			this.entityType = entityType;
 			this.world = world;
 			this.createNew = createNew;
 			this.createNewPreSpawner = createNewPreSpawner;
 			this.preSpawnUpdates = preSpawnerTime;
 
-			pool = new CappedObjectPool(createNew, null, poolSize, poolSize * 2);
+			pool = new CappedObjectPool(createNew, null, poolSize);
 			if(createNewPreSpawner != null)
-				prePool = new CappedObjectPool(createNewPreSpawner, null, poolSize, poolSize * 2);
+				prePool = new CappedObjectPool(createNewPreSpawner, null, poolSize);
 		}
 
 
@@ -87,11 +87,11 @@ package com.auxiliumgames.base.spawn {
 				//do we have to deal with pre spawners?
 				if(createNewPreSpawner != null){
 					//is it time to spawn a new pre spawner?
-					if(updatesSinceLastSpawn ==  (updatesBetweenSpawns - preSpawnUpdates)){
+					if(updatesSinceLastSpawn ==  (updatesBetweenSpawns - preSpawnUpdates) > 0 ? (updatesBetweenSpawns - preSpawnUpdates) : 0){
 						nextLocation = getLocation(nextLocIndex++);
-						var p:ISpawn = prePool.checkOut();
+						var p:SpawnableEntity = prePool.checkOut();
 						var f:Function = function():void {
-							world.remove(p as Entity);
+							world.remove(p);
 							prePool.checkIn(p);
 						};
 
@@ -104,10 +104,9 @@ package com.auxiliumgames.base.spawn {
 					updatesSinceLastSpawn = 0;
 					currentlySpawned++;
 					numSpawnedThisWave++;
-					var s:ISpawn = pool.checkOut();
-					var e:Entity = s as Entity;
+					var s:SpawnableEntity = pool.checkOut();
 					var c:Function = function():void {
-						world.remove(e);
+						world.remove(s);
 						pool.checkIn(s);
 						currentlySpawned--;
 					};
@@ -118,7 +117,7 @@ package com.auxiliumgames.base.spawn {
 					//when we spawned the last prespawner
 					if(createNewPreSpawner == null)
 						nextLocation = getLocation(nextLocIndex++);
-					world.add(s as Entity);
+					world.add(s);
 					s.spawn(c, nextLocation);
 				}
 			}
@@ -165,7 +164,7 @@ package com.auxiliumgames.base.spawn {
 			world.getType(entityType, ents);
 			clearing = true;
 			for (var i:int = 0; i < ents.length; i++) {
-				var s:ISpawn = ents[i] as ISpawn;
+				var s:SpawnableEntity = ents[i] as SpawnableEntity;
 				s.forceComplete();
 			}
 		}

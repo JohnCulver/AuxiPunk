@@ -1,9 +1,14 @@
 package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.shmup.Bullet;
+	import com.auxiliumgames.base.shmup.BulletConfig;
+	import com.auxiliumgames.base.shmup.BulletHelper;
 	import com.auxiliumgames.base.shmup.ShmupInput;
 	import com.auxiliumgames.base.shmup.ShmupPositionManager;
+	import flash.geom.Rectangle;
 	import net.flashpunk.Entity;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
@@ -13,9 +18,38 @@ package com.auxiliumgames.base.example.shmup {
 	 */
 	public class ShmupDude extends Entity{
 		
+		/*
+		 * A static block initializing the bullets we will fire
+		 */
+		{
+			
+			private static function fillInBulletConfig(bcs:Vector.<BulletConfig>, velocity:Number, bInRing:Number):void {
+				var hb:Rectangle = new Rectangle( -7, -7, 6, 6);
+				for (var i:Number = 0; i < bInRing; i++) {
+					var bc:BulletConfig = new BulletConfig();			
+					bc.updateMyLocation = BulletHelper.getUpdateFunctionForRing(velocity, i, bInRing);
+					bc.type = "bullet";
+					bc.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
+					bc.hb = hb;
+					bc.amIdead = function(b:Bullet, updates:uint):Boolean { if (updates > 200) return true; else return false; };
+					bcs.push(bc);
+				}
+			}
+			
+			private static var bInRing:Number = 10;
+			private static var velocity:Number = 5;
+			private static var bcs:Vector.<BulletConfig> = new Vector.<BulletConfig>();
+			
+			fillInBulletConfig(bcs,velocity,bInRing);
+			
+			BulletHelper.addFire("ring1", bcs);
+		}
+		
 		private var image:Spritemap = new Spritemap(TEXTURES.DUDE, 36, 36);
 		private var input:ShmupInput;
 		private var posMan:ShmupPositionManager;
+		
+		private var cantFireTime:uint = 0;
 		
 		public function ShmupDude() {
 			graphic = image;
@@ -41,6 +75,15 @@ package com.auxiliumgames.base.example.shmup {
 			if (Globals.STATE == Globals.STATE_PLAY) {
 				posMan.updatePosition(this, input);
 				updateAnimation();
+				if (cantFireTime <= 0) {
+					if (input.isFocused()) {
+						BulletHelper.fire("ring1",world,x,y);
+						cantFireTime = 10;
+					}
+				}
+				else {
+					cantFireTime--;
+				}
 			}
 			super.update();
 		}

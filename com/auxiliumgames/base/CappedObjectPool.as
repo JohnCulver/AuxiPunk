@@ -67,7 +67,7 @@ THE SOFTWARE.
                  * @param maxSize The maximum possible size for the Pool
                  */
 
-                public function CappedObjectPool(create : Function, clean : Function = null, minSize : int = 50, maxSize : int = 200) {
+                public function CappedObjectPool(create : Function, clean : Function = null, minSize : int = 50, maxSize : int = int.MAX_VALUE) {
                         this.create = create;
                         this.clean = clean;
                         this.minSize = minSize;

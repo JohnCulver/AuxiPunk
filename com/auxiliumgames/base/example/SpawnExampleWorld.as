@@ -20,7 +20,7 @@ import net.flashpunk.World;
 /**
  * @author John Culver
  */
-public class SpawnExampleWorld extends World{
+public class SpawnExampleWorld extends World {
 
     private var i:int = 0;
 	private var spawner:Spawner;
