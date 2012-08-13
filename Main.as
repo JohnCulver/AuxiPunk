@@ -4,7 +4,7 @@ package {
 	
 	/**
 	 * ...
-	 * @author jculver
+	 * @author hi
 	 */
 	public class Main extends Sprite {
 		
