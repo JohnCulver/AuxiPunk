@@ -20,7 +20,7 @@ package com.auxiliumgames.base.plat {
 		private const _v:Point = new Point(0, 0);
 		
 		private const previousPosition:Point = new Point(0, 0);
-		private const previousLowestPoint:int = 0;
+		private const previousVelocity:Point = new Point(0, 0);
 		
 		private var currentlyGrounded:Boolean;
 		private var currentlyAgainstWall:Boolean;
@@ -33,13 +33,15 @@ package com.auxiliumgames.base.plat {
 		public function updatePosition(e:Entity, input:PlatformerInput):void {
 			previousPosition.x = e.x;
 			previousPosition.y = e.y;
+			previousVelocity.x = _v.x;
+			previousVelocity.y = _v.y;
 			calcVelocity(input);
 			applyVelocity(e);
 		}
 		
 		private function calcVelocity(input:PlatformerInput):void {
 
-			currentlyGrounded = _v.y == 0; //TODO this should be done in the same way
+			//currentlyGrounded = _v.y == 0; //TODO this should be done in the same way
 			                               //that currently against wall is done
 										   //also the way applyVelocity is called
 										   //after this method and then in this method we rely on 
@@ -57,7 +59,6 @@ package com.auxiliumgames.base.plat {
 			}
 			else {
 				SimplePlatUtils.applyFriction(this);
-				//_v.y = 0;
 				airJumpsSinceJump = 0;
 				isJumping = false;
 			}
@@ -100,7 +101,7 @@ package com.auxiliumgames.base.plat {
 		private function applyVelocity(e:Entity):void {
 			var i:int;
 			currentlyAgainstWall = false;
-			
+			currentlyGrounded = false;
 			for (i = 0; i < Math.abs(_v.x); i++){
 				if (e.collide(SimplePlatUtils.WALL, e.x + FP.sign(_v.x), e.y)){
 					currentlyAgainstWall = true;
@@ -115,8 +116,9 @@ package com.auxiliumgames.base.plat {
 			for (i = 0; i < Math.abs(_v.y); i++) {
 				var owp:Entity = null;
 				if (e.collide(SimplePlatUtils.WALL, e.x, e.y + FP.sign(_v.y))) {
+					if (_v.y > 0)
+						currentlyGrounded = true;
 					_v.y = 0;
-					
 					break;
 				}
 
@@ -132,7 +134,9 @@ package com.auxiliumgames.base.plat {
 					e.setHitbox(e.width, oldHeight, e.originX, oldOriY);
 					
 					if (underFeet != null) {
-						if(FP.sign(_v.y) > 0 && (e.y - e.halfHeight) < underFeet.y){
+						if (FP.sign(_v.y) > 0 && (e.y - e.halfHeight) < underFeet.y) {
+							if (_v.y > 0)
+								currentlyGrounded = true;
 							_v.y = 0;
 							break;
 						}
