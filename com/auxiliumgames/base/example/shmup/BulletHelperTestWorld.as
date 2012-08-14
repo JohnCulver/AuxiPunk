@@ -2,7 +2,7 @@ package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.Globals;
 	import com.auxiliumgames.base.shmup.Bullet;
-	import com.auxiliumgames.base.shmup.BulletConfig;
+	import com.auxiliumgames.base.shmup.BulletPattern;
 	import com.auxiliumgames.base.shmup.BulletHelper;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -24,11 +24,10 @@ package com.auxiliumgames.base.example.shmup {
 			
 			var bInRing:Number = 10;
 			var velocity:Number = 5;
-			var bcs:Vector.<BulletConfig> = new Vector.<BulletConfig>();
+			var bcs:Vector.<BulletPattern> = new Vector.<BulletPattern>();
 
 			for (var i:Number = 0; i < bInRing; i++) {
-				var bc:BulletConfig = new BulletConfig();			
-				bc.world = this;
+				var bc:BulletPattern = new BulletPattern();			
 				bc.updateMyLocation = BulletHelper.getUpdateFunctionForRing(velocity, i, bInRing);
 				bc.type = "bullet";
 				bc.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
@@ -44,10 +43,9 @@ package com.auxiliumgames.base.example.shmup {
 			var count:Number = 13;
 			var start:Number = 0;
 			var v:Number = 1;
-			var bcs2:Vector.<BulletConfig> = new Vector.<BulletConfig>();
+			var bcs2:Vector.<BulletPattern> = new Vector.<BulletPattern>();
 			for (var j:Number = 0; j < count; j++) {
-				var bc2:BulletConfig = new BulletConfig();			
-				bc2.world = this;
+				var bc2:BulletPattern = new BulletPattern();			
 				bc2.updateMyLocation = BulletHelper.getUpdateFunctionForAV(v, start + (j * inc));
 				bc2.type = "bullet";
 				bc2.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));

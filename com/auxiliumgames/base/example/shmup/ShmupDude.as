@@ -2,7 +2,7 @@ package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.Globals;
 	import com.auxiliumgames.base.shmup.Bullet;
-	import com.auxiliumgames.base.shmup.BulletConfig;
+	import com.auxiliumgames.base.shmup.BulletPattern;
 	import com.auxiliumgames.base.shmup.BulletHelper;
 	import com.auxiliumgames.base.shmup.ShmupInput;
 	import com.auxiliumgames.base.shmup.ShmupPositionManager;
@@ -23,10 +23,10 @@ package com.auxiliumgames.base.example.shmup {
 		 */
 		{
 			
-			private static function fillInBulletConfig(bcs:Vector.<BulletConfig>, velocity:Number, bInRing:Number):void {
+			private static function fillInBulletPattern(bcs:Vector.<BulletPattern>, velocity:Number, bInRing:Number):void {
 				var hb:Rectangle = new Rectangle( -7, -7, 6, 6);
 				for (var i:Number = 0; i < bInRing; i++) {
-					var bc:BulletConfig = new BulletConfig();			
+					var bc:BulletPattern = new BulletPattern();			
 					bc.updateMyLocation = BulletHelper.getUpdateFunctionForRing(velocity, i, bInRing);
 					bc.type = "bullet";
 					bc.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
@@ -38,9 +38,9 @@ package com.auxiliumgames.base.example.shmup {
 			
 			private static var bInRing:Number = 10;
 			private static var velocity:Number = 5;
-			private static var bcs:Vector.<BulletConfig> = new Vector.<BulletConfig>();
+			private static var bcs:Vector.<BulletPattern> = new Vector.<BulletPattern>();
 			
-			fillInBulletConfig(bcs,velocity,bInRing);
+			fillInBulletPattern(bcs,velocity,bInRing);
 			
 			BulletHelper.addFire("ring1", bcs);
 		}

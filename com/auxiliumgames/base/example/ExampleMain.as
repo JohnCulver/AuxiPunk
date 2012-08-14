@@ -33,7 +33,7 @@ import net.flashpunk.utils.Key;
           //FP.world = new SpawnExampleWorld();
             //FP.world = new PartitionExampleWorld();
 			//FP.world = new LightWorldExample();
-			FP.world =  new DialogExampleWorld();
+			//FP.world =  new DialogExampleWorld();
 			//FP.world = new BarTestWorld();
 		}
 

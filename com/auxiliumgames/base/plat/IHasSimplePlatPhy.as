@@ -5,13 +5,21 @@ package com.auxiliumgames.base.plat {
 	 * @author jculver
 	 */
 	public interface IHasSimplePlatPhy {
-		//velocity
+		/**
+		 * velocity
+		 */
 		function get v():Point;
-		//the amount of movement acceleration
+		/**
+		 * the amount of movement acceleration
+		 */
 		function get moveAccel():Point;
-		//max speed an entity can acheive by moving
+		/**
+		 * max speed an entity can acheive by moving
+		 */
 		function get maxMoveSpeed():Point;
-		//max move speed an entity should acheive in any situation
+		/**
+		 * max move speed an entity should acheive in any situation
+		 */
 		function get maxSpeed():Point;
 	}
 

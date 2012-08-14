@@ -2,7 +2,7 @@ package com.auxiliumgames.base.plat {
 	import com.auxiliumgames.base.Globals;
 	import flash.geom.Point;
 	/**
-	 * ...
+	 * Utility class to apply generic forces to an entity.
 	 * @author jculver
 	 */
 	public class SimplePlatUtils {
