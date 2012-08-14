@@ -3,11 +3,14 @@ package com.auxiliumgames.base.shmup {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	/**
-	 * ...
+	 * This is basically a configuration for a bullet pattern, to be used with BulletHelper.
 	 * @author jculver
 	 */
 	public class BulletConfig {
 
+		/**
+		 * The image to be used by each bullet in the pattern.
+		 */
 		public var image:Image;
 		public var hb:Rectangle;
 		public var type:String;

@@ -1,5 +1,6 @@
 package com.auxiliumgames.base.example {
 	import com.auxiliumgames.base.Bar;
+	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	/**
 	 * ...
@@ -10,6 +11,7 @@ package com.auxiliumgames.base.example {
 		private var b:Bar;
 		
 		public function BarTestWorld() {
+			FP.screen.color = 0xFFFFFF;
 			b = new Bar(0xFF0000, 0xFF00FF, 200, 40, true, 0x0000FF, 2);
 			add(b);
 			b.amount = 0;

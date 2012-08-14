@@ -9,7 +9,8 @@ package com.auxiliumgames.base{
 	import flash.utils.getDefinitionByName;
 	
 	/**
-	 * ...
+	 * A preloader borrowed from flash develop to use if loading heavy games.
+	 * 
 	 * @author FlashDevelop
 	 */
 	public class Preloader extends MovieClip {

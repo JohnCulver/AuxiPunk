@@ -20,7 +20,7 @@ package com.auxiliumgames.base.example {
 			im = new Image(TEXTURES.BLOCK);
 			im.centerOrigin();
 			im.scale = 5;
-			dialog.show(50, 50, im, 10, "center", "Well hello whatever this is so stupid, this text is excessive in length, but I am not ashamed of it, ok thanks anyways, cya later. Fuck off.");
+			dialog.show(50, 50, "Well hello whatever this is so stupid, this text is excessive in length, but I am not ashamed of it, ok thanks anyways, cya later. K BYE.", im, 10, "center");
 		}
 		
 		override public function update():void {
@@ -29,13 +29,13 @@ package com.auxiliumgames.base.example {
 				img = new Image(TEXTURES.BLOCK, new Rectangle(0,0,8,8));
 				img.centerOrigin();
 				img.scale = 7;
-				dialog.show(60, 60, img, 10, "center", "Ok but seriously.");
+				dialog.show(60, 60, "Ok but seriously.", img, 10, "center");
 			}
 			if (updates >  120) {
 				img = new Image(TEXTURES.BLOCK, new Rectangle(0,0,8,8));
 				img.centerOrigin();
 				img.scale = 10;
-				dialog.show(100, 60, img, 10, "center", "Ok but not really, but perhaps, but not necessarily, but possibly, but unlikely, highly unlikely even that it might be.");
+				dialog.show(100, 60, "Ok but not really, but perhaps, but not necessarily, but possibly, but unlikely, highly unlikely even that it might be.");
 			}
 			super.update();
 		}

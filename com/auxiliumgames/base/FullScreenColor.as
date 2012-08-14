@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: JC
- * Date: 7/5/12
- * Time: 8:02 AM
- * To change this template use File | Settings | File Templates.
- */
 package com.auxiliumgames.base {
 import flash.display.BitmapData;
 
@@ -12,6 +5,11 @@ import net.flashpunk.Entity;
 import net.flashpunk.FP;
 import net.flashpunk.graphics.Image;
 
+/**
+ * A class to fill the screen with a color. 
+ * The color can fade in or out (good for disolves/scene changes) or remain solid.
+ * @author John Culver
+ */
 public class FullScreenColor extends Entity{
 
     public static const MODE_SOLID:String = "SOLID";
@@ -24,6 +22,14 @@ public class FullScreenColor extends Entity{
     private var mode:String;
     private var fadeRate:Number;
 
+	/**
+	 * 
+	 * @param	color			The color of the fill.
+	 * @param	layer			The layer the fill will be in.
+	 * @param	mode			Use the consts defined in this class for fade in, fade out, or solid.
+	 * @param	fadeRate		The rate (per frame) to fade.
+	 * @param	onComplete		An optional function to be called if a fade mode was seclected, when the fade is complete.
+	 */
     public function FullScreenColor(color:uint,layer:int,mode:String = MODE_SOLID, fadeRate:Number = .02, onComplete:Function = null ) {
         this.mode = mode;
         this.onComplete = onComplete;
@@ -40,6 +46,9 @@ public class FullScreenColor extends Entity{
             image.alpha = 1;
     }
 
+	/**
+	 * This is overriden to handle some of the details when fading.
+	 */
     override public function update():void {
         switch (this.mode){
             case MODE_FADE_IN :

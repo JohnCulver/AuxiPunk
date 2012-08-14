@@ -28,12 +28,12 @@ import net.flashpunk.utils.Key;
 		private function go(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			//FP.world = new ShmupTestWorld();
-			FP.world = new PlatformerLevelTestWorld();
+			//FP.world = new PlatformerLevelTestWorld();
 			//FP.world = new BulletHelperTestWorld();
           //FP.world = new SpawnExampleWorld();
             //FP.world = new PartitionExampleWorld();
 			//FP.world = new LightWorldExample();
-			//FP.world =  new DialogExampleWorld();
+			FP.world =  new DialogExampleWorld();
 			//FP.world = new BarTestWorld();
 		}
 

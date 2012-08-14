@@ -5,10 +5,12 @@ package com.auxiliumgames.base {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
 	/**
-	 * ...
-	 * @author hi
+	 * A class for displaying a dialog box, that can have a portrait in the top left 
+	 * corner. Useful for displaying conversation within a game.
+	 * @author jculver
 	 */
-	public class Dialog extends Entity{
+	public class Dialog extends Entity {
+		//Graphical information
 		private var bg:Image;
 		private var text:Text;
 		private var topBorder:Image;
@@ -21,6 +23,16 @@ package com.auxiliumgames.base {
 		private var dborderWidth:uint;
 		private var lastImage:Image;
 		
+		/**
+		 * 
+		 * @param	width			The total width of the dialog.
+		 * @param	height			The total height of the dialog.
+		 * @param	borderWidth		The width of the border around the dialog.
+		 * @param	layer			The layer should the dialog be displayed in.
+		 * @param	bgColor			The color behind the text.
+		 * @param	borderColor		The color of the border.
+		 * @param	textColor		The color of the text.
+		 */
 		public function Dialog(width:uint, height:uint, borderWidth:uint, layer:int, bgColor:uint, borderColor:uint, textColor:uint) {
 			this.dheight = height;
 			this.dwidth = width;
@@ -40,16 +52,30 @@ package com.auxiliumgames.base {
 			rightBorder.x = dwidth - dborderWidth;
 		}
 		
-		public function show(x:int, y:int, image:Image, textSize:uint, align:String, string:String):void {
+		/**
+		 * To show the dialog on the screen.
+		 * This should be called around the same time as this is added to the world.
+		 * Remove it from the World to make it go away.
+		 * 
+		 * 
+		 * @param	x				The x coordinate of the top left corner.
+		 * @param	y				The y coordinate of the top left corner.
+		 * @param	string			The actual dialog text.
+		 * @param	image			The image (portrait) to display in the top left corner. Can be null.
+		 * @param	textSize		The font size.
+		 * @param	align			The alignment of the text. Values can be "left", "right" or "center".
+		 */
+		public function show(x:int, y:int, string:String, image:Image = null, textSize:uint = 16, align:String = "center"):void {
 			if (lastImage)
 				glist.remove(lastImage);
-			glist.add(image);	
+			if(image)
+				glist.add(image);	
 			this.lastImage = image;
 			this.x = x;
 			this.y = y;
 			
-			var txOff:int = Math.max(dborderWidth * 1.5, (image.scaledWidth / 2));
-			var tyOff:int = Math.max(dborderWidth * 1.5, (image.scaledHeight / 2));
+			var txOff:int = Math.max(dborderWidth * 1.5, (image ? (image.scaledWidth / 2) : 0));
+			var tyOff:int = Math.max(dborderWidth * 1.5, (image ? (image.scaledHeight / 2) : 0));
 			
 			text.x = txOff;
 			text.y = tyOff;
