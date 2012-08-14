@@ -24,7 +24,9 @@ package com.auxiliumgames.base.lighting {
 			centerOrigin();
 			_image.centerOO();
 		}
-		
+		/**
+		 * @return the image the light is using.
+		 */
 		public function get image():Image {
 			return _image;
 		}
