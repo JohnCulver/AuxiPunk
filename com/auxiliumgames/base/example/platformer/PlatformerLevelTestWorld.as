@@ -29,10 +29,14 @@ package com.auxiliumgames.base.example.platformer {
 			var objects:XML = parser.parse(0, 0, 1000);
 			//we add the things we parsed to the world.
 			parser.add(this);
+			//we init a parser for the objects
 			var oParser:PlatformerLevelTestObjectHandler = new PlatformerLevelTestObjectHandler();
+			//we parse the objects
 			oParser.parse(objects);
+			//and add them to the world
 			oParser.add(this);
 			
+			//we do the same thing as above but with the second room
 			var parser2:PlatTmxLevelParser = new PlatTmxLevelParser(LEVELS.ROOM2);
 			var p:XML = parser2.parse(parser.tileWidth * parser.totalWidth, 0, 1000);
 			parser2.add(this);
