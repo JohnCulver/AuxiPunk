@@ -10,8 +10,8 @@ package com.auxiliumgames.base.example.shmup {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	/**
-	 * ...
-	 * @author ...
+	 * A world for testing and demonstrating how to use the BulletPatternManager
+	 * @author jculver
 	 */
 	public class BulletPatternManagerTestWorld extends World{
 		

@@ -3,8 +3,8 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 	/**
-	 * ...
-	 * @author hi
+	 * A class for demonstrating and testing the Bar class
+	 * @author jculver
 	 */
 	public class BarTestWorld extends World{
 		private var updates:uint = 0;

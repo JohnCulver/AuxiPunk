@@ -5,8 +5,8 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	/**
-	 * ...
-	 * @author hi
+	 * A class for demonstrating and testing the Dialog class
+	 * @author jculver
 	 */
 	public class DialogExampleWorld extends World{
 		private var dialog:Dialog;
@@ -20,21 +20,21 @@ package com.auxiliumgames.base.example {
 			im = new Image(TEXTURES.BLOCK);
 			im.centerOrigin();
 			im.scale = 5;
+			//start with a dialog with long text
 			dialog.show(50, 50, "Well hello whatever this is so stupid, this text is excessive in length, but I am not ashamed of it, ok thanks anyways, cya later. K BYE.", im, 10, "center");
 		}
 		
 		override public function update():void {
 			updates++;
+			//after a while we change it to centered text and a different portrait scale
 			if (updates >  50) {
 				img = new Image(TEXTURES.BLOCK, new Rectangle(0,0,8,8));
 				img.centerOrigin();
 				img.scale = 7;
 				dialog.show(60, 60, "Ok but seriously.", img, 10, "center");
 			}
+			//finally we do one with no portrait and default text size etc
 			if (updates >  120) {
-				img = new Image(TEXTURES.BLOCK, new Rectangle(0,0,8,8));
-				img.centerOrigin();
-				img.scale = 10;
 				dialog.show(100, 60, "Ok but not really, but perhaps, but not necessarily, but possibly, but unlikely, highly unlikely even that it might be.");
 			}
 			super.update();

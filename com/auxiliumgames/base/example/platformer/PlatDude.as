@@ -35,7 +35,7 @@ package com.auxiliumgames.base.example.platformer {
 			
 			positionManager = new PlatformerPositionManger();
 			input = new PlatDudeInput();
-			
+			//configure the manager
 			positionManager.setJumpVelocity( -14);
 			positionManager.setMaxMoveVelocity(8, 15);
 			positionManager.setMoveAccel(2);

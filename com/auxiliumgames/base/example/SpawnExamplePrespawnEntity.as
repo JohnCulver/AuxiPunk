@@ -5,12 +5,14 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 	/**
-	 * ...
+	 * A class to demonstrate how prespawning works.
+	 * A prespawner could be like a glimmer before a coin spawns etc.
 	 * @author hi
 	 */
 	public class SpawnExamplePrespawnEntity extends SpawnableEntity{
 		private var onComplete:Function;
 		private var image:Image;
+		//how long to stay before we call onComplete
 		private var lifeTime:Number;
 		
 		public function SpawnExamplePrespawnEntity(){

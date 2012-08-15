@@ -8,6 +8,12 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.FP;
 	import net.flashpunk.World;
 
+	/**
+	 * A class for demonstrating and testing the Partition class.
+	 * 
+	 * Press the tilde to see the grid surrounding.
+	 * @author jculver
+	 */
 	public class PartitionExampleWorld extends World{
 
 		private var i:int = 0;

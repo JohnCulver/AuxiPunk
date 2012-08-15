@@ -7,6 +7,10 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Image;
 
+	/**
+	 * A quick example partition.
+	 * @author jculver
+	 */
 	public class PartitionExampleEntity extends Entity{
 		private var onComplete:Function;
 

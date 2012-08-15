@@ -10,7 +10,8 @@ import net.flashpunk.utils.Input;
 import net.flashpunk.utils.Key;
 
 	/**
-	 * 
+	 * A class used to run the various demo/test worlds.
+	 * Un-comment the desired test world in the go method.
 	 * @author jculver
 	 */
 	[Frame(factoryClass="com.auxiliumgames.base.Preloader")]

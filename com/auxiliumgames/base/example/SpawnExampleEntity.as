@@ -11,10 +11,16 @@ package com.auxiliumgames.base.example {
 
 
 
+	/**
+	 * An example entity to demonstrate a spawnable entity.
+	 * @author jculver
+	 */
 	public class SpawnExampleEntity extends SpawnableEntity{
 		private var onComplete:Function;
+		//to represent an explosion that takes time before we clear the sprite
 		private var exploding:uint;
 
+		//the sprite for the spawnable
 		public var image:Image = new Image(TEXTURES.DUDE,new Rectangle(0,0,32,32))
 
 		public function SpawnExampleEntity() {
@@ -32,6 +38,9 @@ package com.auxiliumgames.base.example {
 		}
 		
 		override public function update():void {
+			/**
+			 * we dont onComplete until the explosion is finished.
+			 */
 			if (exploding > 0) {
 				exploding--;
 				if (exploding == 0){
@@ -47,7 +56,9 @@ package com.auxiliumgames.base.example {
 			
 		}
 		
-		
+		/**
+		 * here we start the explosion
+		 */
 		override public function forceComplete():void {
 			trace("SPLODE");
 			exploding = 30;

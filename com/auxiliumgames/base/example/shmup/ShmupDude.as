@@ -13,7 +13,7 @@ package com.auxiliumgames.base.example.shmup {
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	/**
-	 * ...
+	 * An example of a player controlled shmup entity
 	 * @author jculver
 	 */
 	public class ShmupDude extends Entity{
@@ -22,7 +22,7 @@ package com.auxiliumgames.base.example.shmup {
 		 * A static block initializing the bullets we will fire
 		 */
 		{
-			
+			//used to setup the bullet pattern
 			private static function fillInBulletPattern(bcs:Vector.<BulletPattern>, velocity:Number, bInRing:Number):void {
 				var hb:Rectangle = new Rectangle( -7, -7, 6, 6);
 				for (var i:Number = 0; i < bInRing; i++) {
@@ -37,19 +37,24 @@ package com.auxiliumgames.base.example.shmup {
 				}
 			}
 			
+			//the vars we use for building the pattern
 			private static var bInRing:Number = 10;
 			private static var velocity:Number = 5;
 			private static var bcs:Vector.<BulletPattern> = new Vector.<BulletPattern>();
 			
+			//actually fill in the pattern
 			fillInBulletPattern(bcs,velocity,bInRing);
-			
+			//add the pattern to the manager
 			BulletPatternManager.addFire("ring1", bcs);
 		}
 		
+		//the sprite for the player
 		private var image:Spritemap = new Spritemap(TEXTURES.DUDE, 36, 36);
+		//the keyboard input
 		private var input:ShmupInput;
+		//the position manager
 		private var posMan:ShmupPositionManager;
-		
+		//used to pace the firing of bullets
 		private var cantFireTime:uint = 0;
 		
 		public function ShmupDude() {
@@ -64,17 +69,22 @@ package com.auxiliumgames.base.example.shmup {
 			setHitbox(30, 30,16,16);
             x = 200;
             y = 200;
-			
+			//to manage the position based on the input
 			posMan = new ShmupPositionManager();
+			//ketboard input
 			input = new ShmupDudeInput();
+			//configure the position manager
 			posMan.setBaseVelocity(5);
 			posMan.setCricularVelocity(true);
 			posMan.setFocusVelocity(3);
 		}
 		
 		override public function update():void {
+			//update position based on input
 			posMan.updatePosition(this, input);
+			//change the animation if necessary
 			updateAnimation();
+			//throttle the firing
 			if (cantFireTime <= 0) {
 				if (input.isFocused()) {
 					BulletPatternManager.fire("ring1",world,x,y);
@@ -100,6 +110,10 @@ import com.auxiliumgames.base.shmup.ShmupInput;
 import net.flashpunk.utils.Input;
 import net.flashpunk.utils.Key;
 
+/**
+ * A Keyboard implementation of the shmupinput
+ * @author jculver
+ */
 class ShmupDudeInput implements ShmupInput {
 	public function pressingUp():Boolean {
 		return Input.check(Key.UP);

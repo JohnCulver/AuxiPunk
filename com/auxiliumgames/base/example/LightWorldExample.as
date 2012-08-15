@@ -12,7 +12,7 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.utils.Key;
 	import net.flashpunk.World;
 	/**
-	 * ...
+	 * A class demonstrating simple lighting.
 	 * @author jculver
 	 */
 	public class LightWorldExample extends World{
@@ -20,18 +20,19 @@ package com.auxiliumgames.base.example {
 		
 		
 		public function LightWorldExample() {
+			//cover the screen with darkness
 			darkness = new Darkness(0x000000, 1,5);
 			add(darkness);
-			
+			//add a single light
 			var light1:Light = new Light(new Image(TEXTURES.LIGHT));
 			light1.x = 100; 
 			light1.y = 250;
 			add(light1);
+			//make the background white
 			FP.screen.color = 0xFFFFFF;
-			FP.console.enable();
 		}
 		
-		
+		//move the camera with the arrows
 		override public function update():void {
 			if (Input.check(Key.LEFT))
 				camera.x -= 1;

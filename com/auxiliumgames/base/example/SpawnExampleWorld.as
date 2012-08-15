@@ -11,7 +11,8 @@ package com.auxiliumgames.base.example {
 	import net.flashpunk.World;
 
 	/**
-	 * @author John Culver
+	 * A class for demonstrating and testing the Spawner and related classes.
+	 * @author jculver
 	 */
 	public class SpawnExampleWorld extends World {
 
@@ -29,6 +30,8 @@ package com.auxiliumgames.base.example {
 			FP.console.enable();
 		}
 
+		//this is the function we will pass to the spawner
+		//to determine the location of what it will spawn
 		private function locFunc(t:uint):Point { 
 			i++; 
 			if (i > 10) 
@@ -36,23 +39,30 @@ package com.auxiliumgames.base.example {
 			return new Point(i * 50, i * 50);
 		}
 		
+		//this will be the function we pass to create a new one
 		private function newSpawner():SpawnExampleEntity{
 			return new SpawnExampleEntity();
 		}
-		
+		//to create a new pre spawner
 		private function newPreSpawner():SpawnExamplePrespawnEntity {
 			return new SpawnExamplePrespawnEntity();
 		}
 		
 		override public function update():void {
 			spawner.update();
+			//if we are doing continuous
 			if (continuous) {
+				//did we set off an explosion?
 				if (exploding) {
-					if (spawner.currentNumberSpawned == 0){
+					//cool is the wave over?
+					if (spawner.currentNumberSpawned == 0) {
+						//ok start a new one
 						spawner.newWave(20, 5, continuous, locFunc);
 						exploding = false;
 					}
+					//if not then we are still waiting for them to "explode"
 				}
+				//ok did they press the explode button?
 				else {
 					if (Input.released(Key.ESCAPE)) {
 						spawner.clearAll();
@@ -60,8 +70,11 @@ package com.auxiliumgames.base.example {
 					}
 				}
 			}
+			//no continuous much simpler logic
 			else {
+				//is the wave complete?
 				if (spawner.waveComplete) {
+					//ok start a new one.
 					spawner.newWave(20, 5, false, locFunc);
 				}
 			}
