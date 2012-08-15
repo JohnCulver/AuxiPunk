@@ -7,14 +7,14 @@ package com.auxiliumgames.base.shmup {
 	 * A class to help manage various bullet patterns.
 	 * @author jculver
 	 */
-	public class BulletHelper {
+	public class BulletPatternManager {
 		
 		//info for storing all the bullet patterns.
 		private static var configs:Dictionary = new Dictionary();
 		private static const pool:CappedObjectPool = new CappedObjectPool(newBullet, null, Globals.ETC_ESTIMATED_MAX_BULLETS);
 		private static var checkInBullet:Function = function(b:Bullet,world:World):void { pool.checkIn(b); world.remove(b) } ;
 		
-		public function BulletHelper() {
+		public function BulletPatternManager() {
 		}
 		
 		/**

@@ -14,7 +14,7 @@ public class OneWay extends Entity{
 	 * @param	height		The height of the one way.
 	 */
     public function OneWay(x:int,y:int,width:uint,height:uint) {
-        this.type = SimplePlatUtils.ONEWAYPLATFORM;
+        this.type = PlatForceUtils.ONEWAYPLATFORM;
         setHitbox(width,height);
         this.x = x;
         this.y = y;

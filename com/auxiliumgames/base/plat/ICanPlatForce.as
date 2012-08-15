@@ -1,12 +1,13 @@
 package com.auxiliumgames.base.plat {
 	import flash.geom.Point;
 	/**
-	 * ...
+	 * This interface allows a class to easily apply forces,
+	 * by using SimplePlatUtil
 	 * @author jculver
 	 */
-	public interface IHasSimplePlatPhy {
+	public interface ICanPlatForce {
 		/**
-		 * velocity
+		 * base movement velocity
 		 */
 		function get v():Point;
 		/**
@@ -17,10 +18,6 @@ package com.auxiliumgames.base.plat {
 		 * max speed an entity can acheive by moving
 		 */
 		function get maxMoveSpeed():Point;
-		/**
-		 * max move speed an entity should acheive in any situation
-		 */
-		function get maxSpeed():Point;
 	}
 
 }

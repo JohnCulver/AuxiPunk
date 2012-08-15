@@ -6,6 +6,7 @@ package com.auxiliumgames.base.example.platformer {
 	import com.auxiliumgames.base.lighting.Darkness;
 	import com.auxiliumgames.base.lighting.Light;
 	import com.auxiliumgames.base.plat.PlatTmxLevelParser;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
 
 	import net.flashpunk.World;
@@ -14,14 +15,21 @@ package com.auxiliumgames.base.example.platformer {
 
 	public class PlatformerLevelTestWorld extends World{
 
-
 		public function PlatformerLevelTestWorld() {
-			var parser:PlatTmxLevelParser = new PlatTmxLevelParser(LEVELS.EXAMPLE);
-			var objects:XML = parser.parse();
+			FP.console.enable();
+			var parser:PlatTmxLevelParser = new PlatTmxLevelParser(LEVELS.ROOM1);
+			var objects:XML = parser.parse(0,0);
 			parser.add(this);
 			var oParser:PlatformerLevelTestObjectHandler = new PlatformerLevelTestObjectHandler();
 			oParser.parse(objects);
 			oParser.add(this);
+			
+			var parser2:PlatTmxLevelParser = new PlatTmxLevelParser(LEVELS.ROOM2);
+			var p:XML = parser2.parse(136 * 8, 10);
+			parser2.add(this);
+			var oParser2:PlatformerLevelTestObjectHandler = new PlatformerLevelTestObjectHandler();
+			oParser2.parse(p);
+			oParser2.add(this);
 		}
 
 		

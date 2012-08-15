@@ -55,12 +55,12 @@ package com.auxiliumgames.base.example.platformer {
 		
 		override public function update():void {
 			if (Globals.STATE == Globals.STATE_PLAY) {
+				if(positionManager.onGround && input.pressedJump())
+					SOUNDS.JUMP.play(1);
 				positionManager.updatePosition(this, input);
 				updateAnimation();
 				setCamera();
 			}
-            if(positionManager.onGround && input.pressedJump())
-                SOUNDS.JUMP.play(1);
 			super.update();
 		}
 		

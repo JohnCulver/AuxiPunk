@@ -12,7 +12,7 @@ package com.auxiliumgames.base.example {
 		
 		public function BarTestWorld() {
 			FP.screen.color = 0xFFFFFF;
-			b = new Bar(0xFF0000, 0xFF00FF, 200, 40, true, 0x0000FF, 2);
+			b = new Bar(0xFF0000, 0xFF00FF, 200, 40, true, 0x0000FF, 2, 0x000000);
 			add(b);
 			b.amount = 0;
 			b.x = 100;

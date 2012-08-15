@@ -3,7 +3,7 @@ package com.auxiliumgames.base.shmup {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.World;
 	/**
-	 * This is basically a configuration for a bullet pattern, to be used with BulletHelper.
+	 * This is basically a configuration for a bullet pattern, to be used with BulletPatternManager.
 	 * @author jculver
 	 */
 	public class BulletPattern {
@@ -23,8 +23,8 @@ package com.auxiliumgames.base.shmup {
 		/**
 		 * The function that will update the location. The function should take a bullet
 		 * as the first param, and the number of updates so far as the second.
-		 * Also you can use BulletHelper.getUpdateFunctionForAV and
-		 * BulletHelper.getUpdateFunctionForRing as shortcuts for common patterns.
+		 * Also you can use BulletPatternManager.getUpdateFunctionForAV and
+		 * BulletPatternManager.getUpdateFunctionForRing as shortcuts for common patterns.
 		 */
 		public var updateMyLocation:Function;
 		/**

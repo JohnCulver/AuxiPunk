@@ -6,7 +6,7 @@ package com.auxiliumgames.base.plat {
 	 * ...
 	 * @author hi
 	 */
-	public class PlatformerPositionManger implements IHasSimplePlatPhy {
+	public class PlatformerPositionManger implements ICanPlatForce {
 		
 		private const jumpV:Point = new Point(0, 3);
 		private var airJumps:uint = 0;
@@ -47,29 +47,29 @@ package com.auxiliumgames.base.plat {
 			var wall:Boolean = currentlyAgainstWall;
 			
 			//process environment
-			SimplePlatUtils.applyGravity(this);
+			PlatForceUtils.applyGravity(this);
 			if (!currentlyGrounded){
-				SimplePlatUtils.applyAirResistance(this);
+				PlatForceUtils.applyAirResistance(this);
 			}
 			else {
-				SimplePlatUtils.applyFriction(this);
+				PlatForceUtils.applyFriction(this);
 				airJumpsSinceJump = 0;
 				isJumping = false;
 			}
 			
 			if (wall) 
-				SimplePlatUtils.applyFriction(this, false);
+				PlatForceUtils.applyFriction(this, false);
 			
 			//process input
 			if (jump) {
 				if(currentlyGrounded){
-					SimplePlatUtils.applyGenericAdditiveForce(this, jumpV);
+					PlatForceUtils.applyGenericAdditiveForce(this, jumpV);
 					isJumping = true;
 				}
 				else {
 					if ((isJumping || canAirJumpWhileFalling) && airJumps > 0 && airJumpsSinceJump < airJumps){
 						_v.y = 0; //remove gravity
-						SimplePlatUtils.applyGenericAdditiveForce(this, jumpV);
+						PlatForceUtils.applyGenericAdditiveForce(this, jumpV);
 						airJumpsSinceJump++;
 					}
 					
@@ -78,16 +78,16 @@ package com.auxiliumgames.base.plat {
 			
 			//should we apply oomf?
 			if (!currentlyGrounded && isJumping && input.holdingJump() && _v.y < 0 && jumpOomf.y < 0) {
-				SimplePlatUtils.applyGenericAdditiveForce(this, jumpOomf);
+				PlatForceUtils.applyGenericAdditiveForce(this, jumpOomf);
 			}	
 			
 			if (left) 
-				SimplePlatUtils.applyHMoveAccel(this, false);
+				PlatForceUtils.applyHMoveAccel(this, false);
 			
 			if (right) 
-				SimplePlatUtils.applyHMoveAccel(this, true);
+				PlatForceUtils.applyHMoveAccel(this, true);
 			
-			SimplePlatUtils.zeroOutSmallNumbers(this);
+			PlatForceUtils.zeroOutSmallNumbers(this);
 			
 				
 		}
@@ -97,7 +97,7 @@ package com.auxiliumgames.base.plat {
 			currentlyAgainstWall = false;
 			currentlyGrounded = false;
 			for (i = 0; i < Math.abs(_v.x); i++){
-				if (e.collide(SimplePlatUtils.WALL, e.x + FP.sign(_v.x), e.y)){
+				if (e.collide(PlatForceUtils.WALL, e.x + FP.sign(_v.x), e.y)){
 					currentlyAgainstWall = true;
 					_v.x = 0;
 					break;
@@ -109,7 +109,7 @@ package com.auxiliumgames.base.plat {
 
 			for (i = 0; i < Math.abs(_v.y); i++) {
 				var owp:Entity = null;
-				if (e.collide(SimplePlatUtils.WALL, e.x, e.y + FP.sign(_v.y))) {
+				if (e.collide(PlatForceUtils.WALL, e.x, e.y + FP.sign(_v.y))) {
 					if (_v.y > 0)
 						currentlyGrounded = true;
 					_v.y = 0;
@@ -123,7 +123,7 @@ package com.auxiliumgames.base.plat {
 					//use height = 1
 					//and new y is old y - old height
 					e.setHitbox(e.width, 1, e.originX, oldOriY - oldHeight);
-					var underFeet:Entity = e.collide(SimplePlatUtils.ONEWAYPLATFORM, e.x, e.y);
+					var underFeet:Entity = e.collide(PlatForceUtils.ONEWAYPLATFORM, e.x, e.y);
 					//return hitbox
 					e.setHitbox(e.width, oldHeight, e.originX, oldOriY);
 					
@@ -186,7 +186,7 @@ package com.auxiliumgames.base.plat {
 			jumpV.y = jv;
 		}
 		
-		/* INTERFACE com.auxiliumgames.base.plat.IHasSimplePlatPhy */
+		/* INTERFACE com.auxiliumgames.base.plat.ICanPlatForce */
 		
 		public function get v():Point {
 			return _v;
