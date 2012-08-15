@@ -1,4 +1,5 @@
 package com.auxiliumgames.base.plat {
+	import com.auxiliumgames.base.Config;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -97,7 +98,7 @@ package com.auxiliumgames.base.plat {
 			currentlyAgainstWall = false;
 			currentlyGrounded = false;
 			for (i = 0; i < Math.abs(_v.x); i++){
-				if (e.collide(PlatForceUtils.WALL, e.x + FP.sign(_v.x), e.y)){
+				if (e.collide(Config.TYPE_WALL, e.x + FP.sign(_v.x), e.y)){
 					currentlyAgainstWall = true;
 					_v.x = 0;
 					break;
@@ -109,7 +110,7 @@ package com.auxiliumgames.base.plat {
 
 			for (i = 0; i < Math.abs(_v.y); i++) {
 				var owp:Entity = null;
-				if (e.collide(PlatForceUtils.WALL, e.x, e.y + FP.sign(_v.y))) {
+				if (e.collide(Config.TYPE_WALL, e.x, e.y + FP.sign(_v.y))) {
 					if (_v.y > 0)
 						currentlyGrounded = true;
 					_v.y = 0;
@@ -123,7 +124,7 @@ package com.auxiliumgames.base.plat {
 					//use height = 1
 					//and new y is old y - old height
 					e.setHitbox(e.width, 1, e.originX, oldOriY - oldHeight);
-					var underFeet:Entity = e.collide(PlatForceUtils.ONEWAYPLATFORM, e.x, e.y);
+					var underFeet:Entity = e.collide(Config.TYPE_ONEWAYPLATFORM, e.x, e.y);
 					//return hitbox
 					e.setHitbox(e.width, oldHeight, e.originX, oldOriY);
 					

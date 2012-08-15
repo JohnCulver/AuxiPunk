@@ -2,7 +2,7 @@ package com.auxiliumgames.base.example{
 import com.auxiliumgames.base.example.platformer.PlatformerLevelTestWorld;
 import com.auxiliumgames.base.example.shmup.BulletPatternManagerTestWorld;
 import com.auxiliumgames.base.example.shmup.ShmupTestWorld;
-import com.auxiliumgames.base.Globals;
+import com.auxiliumgames.base.Utils;
 import flash.events.Event;
 import net.flashpunk.Engine;
 import net.flashpunk.FP;
@@ -18,9 +18,7 @@ import net.flashpunk.utils.Key;
 	public class ExampleMain extends Engine {
 
 		public function ExampleMain():void {
-			var width:int = Globals.SCREENWIDTH;
-			var height:int = Globals.SCREENHEIGHT;
-			super(width, height, 30, false);
+			super(800, 800, 30, false);
 			if (stage) go();
 			else addEventListener(Event.ADDED_TO_STAGE, go);
 		}
@@ -28,13 +26,13 @@ import net.flashpunk.utils.Key;
 		private function go(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			//FP.world = new ShmupTestWorld();
-			FP.world = new PlatformerLevelTestWorld();
+			//FP.world = new PlatformerLevelTestWorld();
 			//FP.world = new BulletPatternManagerTestWorld();
 			//FP.world = new SpawnExampleWorld();
             //FP.world = new PartitionExampleWorld();
 			//FP.world = new LightWorldExample();
 			//FP.world =  new DialogExampleWorld();
-			//FP.world = new BarTestWorld();
+			FP.world = new BarTestWorld();
 		}
 
         override public function update():void{

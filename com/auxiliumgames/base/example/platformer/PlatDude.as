@@ -2,7 +2,7 @@ package com.auxiliumgames.base.example.platformer {
 	import com.auxiliumgames.base.example.assets.snd.SOUNDS;
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.example.LightWorldExample;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import com.auxiliumgames.base.lighting.Light;
 	import com.auxiliumgames.base.plat.PlatformerInput;
 	import com.auxiliumgames.base.plat.PlatformerPositionManger;
@@ -54,13 +54,11 @@ package com.auxiliumgames.base.example.platformer {
 		}
 		
 		override public function update():void {
-			if (Globals.STATE == Globals.STATE_PLAY) {
-				if(positionManager.onGround && input.pressedJump())
-					SOUNDS.JUMP.play(1);
-				positionManager.updatePosition(this, input);
-				updateAnimation();
-				setCamera();
-			}
+			if(positionManager.onGround && input.pressedJump())
+				SOUNDS.JUMP.play(1);
+			positionManager.updatePosition(this, input);
+			updateAnimation();
+			setCamera();
 			super.update();
 		}
 		

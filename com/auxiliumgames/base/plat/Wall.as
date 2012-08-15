@@ -1,7 +1,7 @@
 package com.auxiliumgames.base.plat {
 import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 
-import com.auxiliumgames.base.Globals;
+import com.auxiliumgames.base.Utils;
 
 import net.flashpunk.Entity;
 import net.flashpunk.FP;
@@ -16,7 +16,7 @@ import net.flashpunk.masks.Grid;
 		private var g:Grid;
 
 		public function Wall(incType:String,width:uint,height:uint,data:String) {
-            g = new Grid(width * Globals.UNIT, height * Globals.UNIT, Globals.UNIT, Globals.UNIT);
+            g = new Grid(width * 8, height * 8, 8, 8);
             var t:Array = data.split('\n').join('').split(',');
             for (var i:int = 0; i < t.length; i++) {
                 var u:uint = t[i];

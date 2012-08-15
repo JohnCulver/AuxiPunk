@@ -33,6 +33,11 @@ package com.auxiliumgames.base.shmup {
 		 */
 		public var amIdead:Function;
 		
+		/**
+		 * The layer that the bullets should be.
+		 */
+		public var layer:int;
+		 
 		public function BulletPattern() {
 			
 		}

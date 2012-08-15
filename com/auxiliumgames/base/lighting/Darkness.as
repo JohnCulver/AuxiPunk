@@ -1,4 +1,5 @@
 package com.auxiliumgames.base.lighting {
+	import com.auxiliumgames.base.Config;
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
 	import flash.display.BlendMode;
 	import flash.geom.Rectangle;
@@ -44,7 +45,7 @@ package com.auxiliumgames.base.lighting {
 		override public function update():void {
 			this.x = FP.camera.x;
 			this.y = FP.camera.y;
-			collideInto(Light.TYPE, x, y, into);
+			collideInto(Config.TYPE_LIGHT, x, y, into);
 		}
 		
 		/**

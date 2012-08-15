@@ -1,6 +1,7 @@
 package com.auxiliumgames.base.shmup {
 	import com.auxiliumgames.base.CappedObjectPool;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Config;
+	import com.auxiliumgames.base.Utils;
 	import flash.utils.Dictionary;
 	import net.flashpunk.World;
 	/**
@@ -11,7 +12,7 @@ package com.auxiliumgames.base.shmup {
 		
 		//info for storing all the bullet patterns.
 		private static var configs:Dictionary = new Dictionary();
-		private static const pool:CappedObjectPool = new CappedObjectPool(newBullet, null, Globals.ETC_ESTIMATED_MAX_BULLETS);
+		private static const pool:CappedObjectPool = new CappedObjectPool(newBullet, null, Config.ESTIMATED_MAX_BULLETS_ONSCREEN);
 		private static var checkInBullet:Function = function(b:Bullet,world:World):void { pool.checkIn(b); world.remove(b) } ;
 		
 		public function BulletPatternManager() {
@@ -45,7 +46,7 @@ package com.auxiliumgames.base.shmup {
 		 * @return
 		 */
 		public static function getUpdateFunctionForAV(velocity:Number,angle:Number):Function {
-			var a1:Number = Globals.degreesToRadians(angle);
+			var a1:Number = Utils.degreesToRadians(angle);
 			var cosa:Number = Math.cos(a1);
 			var xp:Number = velocity * cosa;
 			var sina:Number = Math.sin(a1);
@@ -89,7 +90,7 @@ package com.auxiliumgames.base.shmup {
 				var b:Bullet = pool.checkOut() as Bullet;
 				if (b != null) {
 					var bp:BulletPattern = bps[i] as BulletPattern;
-					b.spawn(startx, starty, bp.updateMyLocation, bp.amIdead, checkInBullet, bp.image, bp.hb, bp.type);
+					b.spawn(startx, starty, bp.updateMyLocation, bp.amIdead, checkInBullet, bp.image, bp.hb, bp.layer, bp.type);
 					world.add(b);
 					if (putInto != null)
 						putInto.push(b);

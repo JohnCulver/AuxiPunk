@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import com.auxiliumgames.base.spawn.SpawnableEntity;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -21,7 +21,7 @@ package com.auxiliumgames.base.example {
 			graphic = image;
 			setHitboxTo(image);
 			type = "see";
-			layer = Globals.LAYER_BULLET + 2;
+			layer = 105;
 		}
 
 		override public function spawn(onComplete:Function, l:Point):void {

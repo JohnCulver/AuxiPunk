@@ -1,28 +1,12 @@
 package com.auxiliumgames.base.plat {
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Config;
+	import com.auxiliumgames.base.Utils;
 	import flash.geom.Point;
 	/**
-	 * Utility class to apply generic forces to an entity.
+	 * Utility class to apply generic forces to an ICanPlatForce.
 	 * @author jculver
 	 */
 	public class PlatForceUtils {
-		
-		//"Physics" lol
-		//gravity, (additive)
-		public static const GRAVITY:Number = .8;
-		//should be < 1 (mult)
-		public static const AIRRESISTANCE:Number = .5;
-		//should be < 1 (mult)
-		public static const FLOORFRICTION:Number = .8;
-		//should be < 1 (mult)
-		public static const WALLFRICTION:Number = 1;
-		//close enough to zero that we can consider it 0
-		public static const CLOSENOUGHTOZERO:Number = .05;
-		//what is the type to check against for walls?
-		public static const WALL:String = "wall";
-		//what is the type to check against for one wat platforms?
-		public static const ONEWAYPLATFORM:String = "onewayplatform";
-		
 		
 		
 		public function PlatForceUtils() {
@@ -30,14 +14,14 @@ package com.auxiliumgames.base.plat {
 		}
 		
 		public static function applyGravity(phy:ICanPlatForce):void {
-			phy.v.y += GRAVITY;
+			phy.v.y += Config.GRAVITY;
 		}
 		
 		public static function applyFriction(phy:ICanPlatForce,floor:Boolean = true):void {
 			if(floor)
-				phy.v.x *= FLOORFRICTION;
+				phy.v.x *= Config.FLOORFRICTION;
 			else
-				phy.v.y *= WALLFRICTION;
+				phy.v.y *= Config.WALLFRICTION;
 				
 		}
 		
@@ -98,14 +82,14 @@ package com.auxiliumgames.base.plat {
 		}
 		
 		public static function zeroOutSmallNumbers(phy:ICanPlatForce):void {
-			if (Math.abs(phy.v.x) < CLOSENOUGHTOZERO)
+			if (Math.abs(phy.v.x) < Config.CLOSENOUGHTOZERO)
 				phy.v.x = 0;
-			if (Math.abs(phy.v.y) < CLOSENOUGHTOZERO)
+			if (Math.abs(phy.v.y) < Config.CLOSENOUGHTOZERO)
 				phy.v.y = 0;	
 		}
 		
 		static public function applyAirResistance(phy:ICanPlatForce):void {
-			phy.v.x *= AIRRESISTANCE;
+			phy.v.x *= Config.AIRRESISTANCE;
 		}
 		
 	}

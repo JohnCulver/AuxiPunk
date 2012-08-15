@@ -1,7 +1,7 @@
 package com.auxiliumgames.base.shmup 	
 {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import net.flashpunk.Entity;
@@ -22,7 +22,6 @@ package com.auxiliumgames.base.shmup
 		private var image:Image;
 		
 		public function Bullet() {
-			this.layer = Globals.LAYER_BULLET;
 		}
 		
 		/**
@@ -42,9 +41,10 @@ package com.auxiliumgames.base.shmup
 		 * 
 		 * @param	image				The graphic of the bullet.
 		 * @param	hitBox				The hitbox used for collision.
+		 * @param	layer				The layer for the bullet.
 		 * @param	type				The type used for collision.
 		 */
-		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, whenIamDead:Function, image:Image, hitBox:Rectangle, type:String = "bullet"):void {
+		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, whenIamDead:Function, image:Image, hitBox:Rectangle, layer:uint, type:String = "bullet"):void {
 			x = startx;
 			y = starty;
 			this.updateMyLocation = updateMyLocation;
@@ -57,6 +57,7 @@ package com.auxiliumgames.base.shmup
 			forcedToBeClear = false;
 			updateCount = 0;
 			this.collidable = true;
+			this.layer = layer;
 		}
 		
 		/**

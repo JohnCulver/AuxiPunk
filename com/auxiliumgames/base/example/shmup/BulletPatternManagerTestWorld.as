@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import com.auxiliumgames.base.shmup.Bullet;
 	import com.auxiliumgames.base.shmup.BulletPattern;
 	import com.auxiliumgames.base.shmup.BulletPatternManager;
@@ -32,6 +32,7 @@ package com.auxiliumgames.base.example.shmup {
 				bc.type = "bullet";
 				bc.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
 				bc.hb = hb;
+				bc.layer = 100;
 				bc.amIdead = function(b:Bullet, updates:uint):Boolean { if (updates > 200) return true; else return false; };
 				bcs.push(bc);
 			}
@@ -50,6 +51,7 @@ package com.auxiliumgames.base.example.shmup {
 				bc2.type = "bullet";
 				bc2.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
 				bc2.hb = hb;
+				bc2.layer = 100;
 				bc2.amIdead = function(b:Bullet, updates:uint):Boolean { if (updates > 200) return true; else return false; };
 				bcs2.push(bc2);
 			}

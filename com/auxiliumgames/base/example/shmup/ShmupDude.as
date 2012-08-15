@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example.shmup {
 	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import com.auxiliumgames.base.shmup.Bullet;
 	import com.auxiliumgames.base.shmup.BulletPattern;
 	import com.auxiliumgames.base.shmup.BulletPatternManager;
@@ -31,6 +31,7 @@ package com.auxiliumgames.base.example.shmup {
 					bc.type = "bullet";
 					bc.image = new Image(TEXTURES.BLOCK, new Rectangle(0, 0, 8, 8));
 					bc.hb = hb;
+					bc.layer = 100;
 					bc.amIdead = function(b:Bullet, updates:uint):Boolean { if (updates > 200) return true; else return false; };
 					bcs.push(bc);
 				}
@@ -72,19 +73,18 @@ package com.auxiliumgames.base.example.shmup {
 		}
 		
 		override public function update():void {
-			if (Globals.STATE == Globals.STATE_PLAY) {
-				posMan.updatePosition(this, input);
-				updateAnimation();
-				if (cantFireTime <= 0) {
-					if (input.isFocused()) {
-						BulletPatternManager.fire("ring1",world,x,y);
-						cantFireTime = 10;
-					}
-				}
-				else {
-					cantFireTime--;
+			posMan.updatePosition(this, input);
+			updateAnimation();
+			if (cantFireTime <= 0) {
+				if (input.isFocused()) {
+					BulletPatternManager.fire("ring1",world,x,y);
+					cantFireTime = 10;
 				}
 			}
+			else {
+				cantFireTime--;
+			}
+
 			super.update();
 		}
 		

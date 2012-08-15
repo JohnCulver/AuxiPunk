@@ -1,7 +1,8 @@
 package com.auxiliumgames.base.shmup {
-	import com.auxiliumgames.base.Globals;
+	import com.auxiliumgames.base.Utils;
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	/**
 	 * Used to manage where a shmup entity can move on the screen.
 	 * @author jculver
@@ -12,16 +13,16 @@ package com.auxiliumgames.base.shmup {
 		private var baseVelocity:Number = 3.5;
         private var focusVelocity:Number = 2;
         private var v:Point = new Point(0,0);
-        private var xValues:Point = new Point(0,Globals.SCREENWIDTH);
-        private var yValues:Point = new Point(0,Globals.SCREENHEIGHT);
+        private var xValues:Point = new Point(0,FP.screen.width);
+        private var yValues:Point = new Point(0,FP.screen.width);
         
 		//Basically circular velocity means that no matter what directions are being input the total velocity is the same.
 		//When this is false, if the user is pressing up and left, the will move BOTH up and left in the amount of the velocity.
 		//However if this is true, then the user will only move the velocity amount in the up left direction.
 		private var circularVelocity:Boolean = true;
         private const leftCV:Point = new Point(-Math.cos(0),-Math.sin(0));
-        private const upLeftCV:Point = new Point(-Math.cos(Globals.degreesToRadians(45)),-Math.sin(Globals.degreesToRadians(45)));
-        private const upCV:Point = new Point(Math.cos(Globals.degreesToRadians(90)),-Math.sin(Globals.degreesToRadians(90)));
+        private const upLeftCV:Point = new Point(-Math.cos(Utils.degreesToRadians(45)),-Math.sin(Utils.degreesToRadians(45)));
+        private const upCV:Point = new Point(Math.cos(Utils.degreesToRadians(90)),-Math.sin(Utils.degreesToRadians(90)));
 		
 		public function ShmupPositionManager() {
 			

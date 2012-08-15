@@ -1,5 +1,5 @@
 package com.auxiliumgames.base.example.shmup {
-import com.auxiliumgames.base.Globals;
+import com.auxiliumgames.base.Utils;
 import com.auxiliumgames.base.shmup.Bullet;
 	import flash.geom.Point;
 	import net.flashpunk.FP;
@@ -46,7 +46,7 @@ import com.auxiliumgames.base.shmup.Bullet;
 		}
 		
 		private function spawnOne(velocity:Number, angle:Number):void {
-			var a1:Number = Globals.degreesToRadians(angle);
+			var a1:Number = Utils.degreesToRadians(angle);
 			var cosa:Number = Math.cos(a1);
 			var xp:Number = velocity * cosa;
 			var sina:Number = Math.sin(a1);
