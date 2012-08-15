@@ -13,12 +13,21 @@ package com.auxiliumgames.base.example.platformer {
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 
+	/**
+	 * An example of a platformer level parsed from 
+	 * two tiled maps side by side.
+	 * 
+	 * @author jculver
+	 */
 	public class PlatformerLevelTestWorld extends World{
 
 		public function PlatformerLevelTestWorld() {
-			FP.console.enable();
+
+			//we init a level parser with the Tiled map
 			var parser:PlatTmxLevelParser = new PlatTmxLevelParser(LEVELS.ROOM1);
-			var objects:XML = parser.parse(0,0,1000);
+			//we parse the level, and we get the objects layer back.
+			var objects:XML = parser.parse(0, 0, 1000);
+			//we add the things we parsed to the world.
 			parser.add(this);
 			var oParser:PlatformerLevelTestObjectHandler = new PlatformerLevelTestObjectHandler();
 			oParser.parse(objects);

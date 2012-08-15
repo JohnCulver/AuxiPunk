@@ -21,8 +21,9 @@ package com.auxiliumgames.base.example.platformer {
 		
 		//the example texture used for our player entity
 		private var image:Spritemap = new Spritemap(TEXTURES.DUDE, 36, 36);
-		
+		//used to manage the position of any platformer entity
 		private var positionManager:PlatformerPositionManger;
+		//we make a keyboard based implementation of this below
 		private var input:PlatformerInput;
 		
 		public function PlatDude() {
@@ -40,7 +41,7 @@ package com.auxiliumgames.base.example.platformer {
 			positionManager.setMoveAccel(2);
 			positionManager.setAirJumps(4);
 			positionManager.setCanAirJumpWhileFalling(true);
-			//setJumpOomf(-.3); //.25
+			positionManager.setJumpOomf(0);
 			
 			centerOrigin();
 			image.centerOrigin();
@@ -50,30 +51,39 @@ package com.auxiliumgames.base.example.platformer {
 			setCamera();
 		}
 		
+		//keep the camera on the player
 		private function setCamera():void {
 			FP.camera.x = Math.floor(x - FP.screen.width/2);
 			FP.camera.y = Math.floor(y - FP.screen.height/2);
 		}
 		
 		override public function update():void {
+			//play a sound when we jump
 			if(positionManager.onGround && input.pressedJump())
 				SOUNDS.JUMP.play(1);
+			//update position	
 			positionManager.updatePosition(this, input);
+			//update animation
 			updateAnimation();
+			//move camera to player
 			setCamera();
 			super.update();
 		}
 		
+		//change the animation based on the state of the entity
 		private function updateAnimation():void {
+			//if he is jumping
 			if (!positionManager.onGround) {
 				image.play("jump");
 				image.angle += ((positionManager.v.x > 0) ? -.5 : ((positionManager.v.x == 0) ? 0 : .5));
 			}
 			else {
 				image.angle = 0;
-				if (positionManager.v.x != 0){
+				if (positionManager.v.x != 0) {
+					//if moving
 					if(input.pressingRight() || input.pressingLeft())
 						image.play("move");
+					//if resting	
 					else
 						image.play("rest");
 					image.flipped = positionManager.v.x > 0;
@@ -90,6 +100,11 @@ package com.auxiliumgames.base.example.platformer {
 import com.auxiliumgames.base.plat.PlatformerInput;
 import net.flashpunk.utils.Input;
 import net.flashpunk.utils.Key;
+/**
+ * An implementation of the input that used the keyboard.
+ * @author jculver
+ * 
+ */
 class PlatDudeInput implements PlatformerInput{
 	
 	/* INTERFACE com.auxiliumgames.base.plat.PlatformerInput */
