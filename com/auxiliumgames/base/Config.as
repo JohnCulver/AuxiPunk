@@ -17,7 +17,7 @@ package com.auxiliumgames.base {
 		public static const ESTIMATED_MAX_BULLETS_ONSCREEN:uint = 200;
 		
 		
-		//"Physics" lol
+		//Platformer "Physics" lol
 		/**
 		 * The vertical force applied each frame to airborn Entities managed 
 		 * by a PlatformPositionManager.
@@ -41,7 +41,8 @@ package com.auxiliumgames.base {
 		/**
 		 * When applying the physical type force numbers to an entity,
 		 * sometimes numbers get very small. This is the smallest number we
-		 * intend to deal with. Anything with absolute value smaller than this will be considered zero.
+		 * intend to deal with. Anything with absolute value smaller than this will be considered zero when
+		 * applying forces like friction and air resistance.
 		 */
 		public static const CLOSENOUGHTOZERO:Number = .05;
 		
