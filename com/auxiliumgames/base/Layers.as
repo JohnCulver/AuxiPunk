@@ -18,8 +18,8 @@ package com.auxiliumgames.base {
 		 * public static const PLAYER:int = 750;
 		 * public static const BULLET:int = 500;
 		 * 
-		 * this would put walls behind, players and bullets
-		 * and keep bullets in front of players.
+		 * this would put walls behind, players and bullets,
+		 * and it would keep bullets in front of players.
 		 * 
 		 * Then all we have to do, is use these layers in the corresponding entities like this:
 		 *	  

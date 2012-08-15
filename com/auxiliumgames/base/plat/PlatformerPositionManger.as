@@ -4,25 +4,29 @@ package com.auxiliumgames.base.plat {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	/**
-	 * ...
-	 * @author hi
+	 * A class used to manage an Entities position in a platformer type game.
+	 * This can be used for the player character or enemies or both.
+	 * @author jculver
 	 */
 	public class PlatformerPositionManger implements ICanPlatForce {
 		
-		private const jumpV:Point = new Point(0, 3);
+		//jump related vars
+		private const jumpV:Point = new Point(0, -3);
 		private var airJumps:uint = 0;
 		private var canAirJumpWhileFalling:Boolean = false;
 		private var airJumpsSinceJump:uint = 0;
 		private var jumpOomf:Point = new Point(0, 0);
 		
+		//used for ICanPlatForce interface.
 		private const _moveAccel:Point = new Point(.2, 0);
 		private const _maxMoveSpeed:Point = new Point(4, 4);
-		private const _maxSpeed:Point = new Point(10, 10);
 		private const _v:Point = new Point(0, 0);
 		
+		//information about the previous state.
 		private const previousPosition:Point = new Point(0, 0);
 		private const previousVelocity:Point = new Point(0, 0);
 		
+		//information about which types of forces we need to apply to this entity.
 		private var currentlyGrounded:Boolean;
 		private var currentlyAgainstWall:Boolean;
 		private var isJumping:Boolean;
@@ -31,15 +35,28 @@ package com.auxiliumgames.base.plat {
 			
 		}
 		
+		/**
+		 * Updates the position of e based on input, and wall collisions.
+		 * @param	e		The entity whose position needs updating.
+		 * @param	input	The input we will use to help determine position.
+		 */
 		public function updatePosition(e:Entity, input:PlatformerInput):void {
+			//before updating, record the previous state
 			previousPosition.x = e.x;
 			previousPosition.y = e.y;
 			previousVelocity.x = _v.x;
 			previousVelocity.y = _v.y;
+			//calc the velocity before applying it
 			calcVelocity(input);
+			//apply the calculated velocity to the entity
 			applyVelocity(e);
 		}
 		
+		/**
+		 * Calc the velocity vector based on the input, and the 
+		 * environmental forces like gravity and friction.sssssss
+		 * @param	input	The current state of the input.
+		 */
 		private function calcVelocity(input:PlatformerInput):void {
 			
 			var left:Boolean = input.pressingLeft();
@@ -93,10 +110,16 @@ package com.auxiliumgames.base.plat {
 				
 		}
 		
+		/**
+		 * This applies the velocity we calculated to the position of e, but respects any walls
+		 * and platforms.
+		 * @param	e		The entity whose position will be updated.
+		 */
 		private function applyVelocity(e:Entity):void {
 			var i:int;
 			currentlyAgainstWall = false;
 			currentlyGrounded = false;
+			//collision checks on the x axis
 			for (i = 0; i < Math.abs(_v.x); i++){
 				if (e.collide(Config.TYPE_WALL, e.x + FP.sign(_v.x), e.y)){
 					currentlyAgainstWall = true;
@@ -107,7 +130,7 @@ package com.auxiliumgames.base.plat {
 					e.x += FP.sign(_v.x);
 				
 			}
-
+			//collision checks on the y axis
 			for (i = 0; i < Math.abs(_v.y); i++) {
 				var owp:Entity = null;
 				if (e.collide(Config.TYPE_WALL, e.x, e.y + FP.sign(_v.y))) {
@@ -117,6 +140,7 @@ package com.auxiliumgames.base.plat {
 					break;
 				}
 
+				//the added complexity here is due to oneway platforms
 				else {
 					
 					var oldHeight:int = e.height;
@@ -144,45 +168,72 @@ package com.auxiliumgames.base.plat {
 			}
 		}
 		
+		//for use with oneway platforms
 		private function iWasPreviouslyHigherThanThisWall(e:Entity):Boolean {
 			var highestOfWall:Number = getHighestYOfThisWallIAmHitting(e);
 			return previousPosition.y <= highestOfWall + 1;
 		}
-		
+		//for use with oneway platforms
 		private function getHighestYOfThisWallIAmHitting(e:Entity):int {
 			return e.y - e.height;
 		}
 		
+		/**
+		 * True if the entity has ground underneath it.
+		 */
 		public function get onGround():Boolean {
 			return currentlyGrounded;
 		}
 		
+		/**
+		 * The force applied to the y axis while the user holds the jump
+		 * button while airborn.
+		 * @param	jo
+		 */
 		public function setJumpOomf(jo:Number):void {
 			jumpOomf.y = jo;
 		}
-		
+
+		/**
+		 * Sets the number of jumps an entity can perform when
+		 * already jumping.
+		 * @param	aj
+		 */
 		public function setAirJumps(aj:Number):void {
 			airJumps = aj;
 		}
 		
+		/**
+		 * Can the entity jump when it just walked off a ledge (as opposed to being airborn
+		 * due to a jump)
+		 * @param	cajwf
+		 */
 		public function setCanAirJumpWhileFalling(cajwf:Boolean):void {
 			canAirJumpWhileFalling = cajwf;
 		}
 		
+		/**
+		 * Sets the horizontal movement acceleration
+		 * @param	xma		The amount applied multiplicitavely each frame
+		 */
 		public function setMoveAccel(xma:Number):void {
 			_moveAccel.x = xma;
 		}
 		
+		/**
+		 * The max speeds an entity can acheive in either direction.
+		 * @param	xmmv
+		 * @param	ymmv
+		 */
 		public function setMaxMoveVelocity(xmmv:Number, ymmv:Number):void {
 			_maxMoveSpeed.x = xmmv;
 			_maxMoveSpeed.y = ymmv;
 		}
 		
-		public function setMaxVelocity(xmv:Number, ymv:Number):void {
-			_maxSpeed.x = xmv;
-			_maxSpeed.y = ymv;
-		}
-		
+		/**
+		 * The velocity of a jump. Use negative values for jumps that go up.
+		 * @param	jv
+		 */
 		public function setJumpVelocity(jv:Number):void {
 			jumpV.y = jv;
 		}
@@ -201,9 +252,6 @@ package com.auxiliumgames.base.plat {
 			return _maxMoveSpeed;
 		}
 		
-		public function get maxSpeed():Point {
-			return _maxSpeed;
-		}
 	}
 
 }
