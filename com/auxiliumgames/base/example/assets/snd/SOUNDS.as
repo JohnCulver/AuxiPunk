@@ -4,6 +4,10 @@ package com.auxiliumgames.base.example.assets.snd {
 
 	import net.flashpunk.Sfx;
 
+	/**
+	 * @author jculver
+	 * Used to store reference to the sounds used in the examples
+	 */
 	public class SOUNDS {
 
 

@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example.assets.levels {
 	/**
-	 * ...
+	 * A quick reference to the level files used in the examples.
 	 * @author jculver
 	 */
 	public class LEVELS {

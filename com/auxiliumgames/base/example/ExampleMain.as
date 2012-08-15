@@ -9,8 +9,8 @@ import net.flashpunk.FP;
 import net.flashpunk.utils.Input;
 import net.flashpunk.utils.Key;
 
-/**
-	 * ...
+	/**
+	 * 
 	 * @author jculver
 	 */
 	[Frame(factoryClass="com.auxiliumgames.base.Preloader")]

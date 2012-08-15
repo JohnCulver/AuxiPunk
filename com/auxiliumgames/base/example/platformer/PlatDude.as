@@ -14,12 +14,14 @@ package com.auxiliumgames.base.example.platformer {
 	import net.flashpunk.utils.Key;
 	
 	/**
-	 * ...
+	 * An example of a player controlled entity in a platformer game.
 	 * @author jculver
 	 */
 	public class PlatDude extends Entity{
 		
+		//the example texture used for our player entity
 		private var image:Spritemap = new Spritemap(TEXTURES.DUDE, 36, 36);
+		
 		private var positionManager:PlatformerPositionManger;
 		private var input:PlatformerInput;
 		

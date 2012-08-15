@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.example.assets.tex  {
 	/**
-	 * ...
+	 * Used to store reference to the textures used in the examples
 	 * @author jculver
 	 */
 	public class TEXTURES {
