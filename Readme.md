@@ -9,9 +9,12 @@
  * a platformer level parser for Tiled tmx files
  * lighting 
  * object pooling
- * bullet pattern design utilities 
+ * bullet patterns
  * screen partitioning 
- * a few other random things that get reused frequently
+ * rpg style dialogs
+ * bars (health/etc)
+ * periodic "spawning" (waves)
+ * etc!
 
 AuxiPunk is built on top of [FlashPunk](https://github.com/Draknek/FlashPunk "FlashPunk"). The FlashPunk license can be found by [Clicking Here](https://github.com/Draknek/FlashPunk/blob/master/license.txt "FlashPunk License")
 
