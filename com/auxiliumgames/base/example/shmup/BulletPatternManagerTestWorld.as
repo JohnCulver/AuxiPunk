@@ -17,6 +17,7 @@ package com.auxiliumgames.base.example.shmup {
 		
 		private var image:Image = new Image(TEXTURES.BLOCK, new Rectangle(18, 10, 8, 8));
 		private var hb:Rectangle = new Rectangle( -7, -7, 6, 6);
+		private var fired:Boolean = false;
 		
 		
 		public function BulletPatternManagerTestWorld() {
@@ -38,7 +39,7 @@ package com.auxiliumgames.base.example.shmup {
 			}
 			
 			BulletPatternManager.addFire("ring1", bcs);
-			BulletPatternManager.fire("ring1", this, 200, 200);
+			
 			
 			var inc:Number = 15;
 			var count:Number = 13;
@@ -56,8 +57,15 @@ package com.auxiliumgames.base.example.shmup {
 				bcs2.push(bc2);
 			}
 			BulletPatternManager.addFire("arc1", bcs2);
-			BulletPatternManager.fire("arc1", this,  200, 200);
-			
+		}
+		
+		override public function update():void {
+			super.update();
+			if (!fired) {
+				BulletPatternManager.fire("arc1",  200, 200);
+				BulletPatternManager.fire("ring1", 200, 200);
+				fired = true;
+			}
 		}
 		
 	}

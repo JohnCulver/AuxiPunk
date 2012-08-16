@@ -2,20 +2,10 @@ package com.auxiliumgames.base {
 	/**
 	 * Settings that will need to be configurable for each game.
 	 * 
-	 * Each game using Auxipunk will probably have different values here.
+	 * Each game using Auxipunk will probably have some different values here.
 	 * @author jculver
 	 */
 	public class Config {
-		
-		//performance
-		/**
-		 * The amount of bullets you expect to see on screen, at most.
-		 * This is an estimate, it doesn't have to be exact, it isn't a limit, but
-		 * the closer the estimate, the better the performance will be.
-		 * Set this to 0 if not using Bullets at all.
-		 */
-		public static const ESTIMATED_MAX_BULLETS_ONSCREEN:uint = 200;
-		
 		
 		//Platformer "Physics" lol
 		/**

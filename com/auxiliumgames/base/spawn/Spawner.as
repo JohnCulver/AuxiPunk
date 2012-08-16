@@ -1,6 +1,7 @@
 package com.auxiliumgames.base.spawn {
 	import com.auxiliumgames.base.CappedObjectPool;
 	import flash.geom.Point;
+	import net.flashpunk.FP;
 
 	import net.flashpunk.Entity;
 	import net.flashpunk.World;
@@ -12,15 +13,12 @@ package com.auxiliumgames.base.spawn {
 	 */
 	public class Spawner{
 
-		private var createNew:Function;				//this should return a ? extends Entity, implements ISpawn
+		private var spawnClass:Class;				//this is the class we will spawn ( should extend SpawnableEntity)
 		private var updatesBetweenSpawns:uint;		//the frequency of spawning
 		private var getLocation:Function;			//the function called when we need to determine the next location
-		private var createNewPreSpawner:Function;	//this should return a ? extends Entity, implements ISpawn
+		private var preSpawnClass:Class;			//this should be a ? extends SpawnableEntity
 		private var preSpawnUpdates:uint;			//the number of updates a prespawn will be created before a spawner
-		private var prePool:CappedObjectPool;		//the pool where we hold our prespawners
-		private var pool:CappedObjectPool;			//the pool we use to hold our spawned entities
-
-
+		
 		private var updatesSinceLastSpawn:uint = 0; //updates since last spawn
 		private var max:uint = 0;                   //max things we will spawn
 		private var continuous:Boolean = false;     //should we keep spawning if some of our spawned things go away?
@@ -28,30 +26,20 @@ package com.auxiliumgames.base.spawn {
 		private var numSpawnedThisWave:uint = 0;    //number spawned this wave
 
 		private var nextLocation:Point;             //the next spawn location
-		private var nextLocIndex:uint = 0;          //the index we will feed to getLocation
-		private var world:World;                    //the world we will add too/remove from
+		private var nextLocIndex:uint = 0;          //the index we will feed to getLocationm
 		private var entityType:String;              //the type of the entity we will spawn
 		private var clearing:Boolean;               //when this is true we are in process of ending the wave, and spawning is done for now
 
 		/**
 		 * Creates a new spawner:
-		 * @param	world   				the world we will add too/remove from
-		 * @param	createNew				the method we call to create a new entity that we will be spawning (this should return a SpawnableEntity)
-		 * @param	entityType				the type of the entities we will be spawning (used for clearing)
-		 * @param	poolSize				the initial size of the pool
-		 * @param	createNewPreSpawner		the function that will be called to crate a new prespawner (this should return a SpawnableEntity)
-		 * @param	preSpawnerTime			the time the prespawner gets spawned before the spawner
+		 * @param	spawnClass			the class of the thing we want to spawn. (this should extend SpawnableEntity)
+		 * @param	preSpawnClass		the class of the thing we want to display before we spawn. (this should extend SpawnableEntity)
+		 * @param	preSpawnerTime		the time the prespawner gets spawned before the spawner
 		 */
-		public function Spawner(world:World, createNew:Function, entityType:String, poolSize:uint = 100, createNewPreSpawner:Function = null, preSpawnerTime:uint = 1) {
-			this.entityType = entityType;
-			this.world = world;
-			this.createNew = createNew;
-			this.createNewPreSpawner = createNewPreSpawner;
+		public function Spawner( spawnClass:Class, preSpawnClass:Class = null, preSpawnerTime:uint = 1) {
+			this.spawnClass = spawnClass;
+			this.preSpawnClass = preSpawnClass;
 			this.preSpawnUpdates = preSpawnerTime;
-
-			pool = new CappedObjectPool(createNew, null, poolSize);
-			if(createNewPreSpawner != null)
-				prePool = new CappedObjectPool(createNewPreSpawner, null, poolSize);
 		}
 
 
@@ -85,18 +73,15 @@ package com.auxiliumgames.base.spawn {
 				updatesSinceLastSpawn++;
 
 				//do we have to deal with pre spawners?
-				if(createNewPreSpawner != null){
+				if(preSpawnClass != null){
 					//is it time to spawn a new pre spawner?
 					if(updatesSinceLastSpawn ==  (updatesBetweenSpawns - preSpawnUpdates) > 0 ? (updatesBetweenSpawns - preSpawnUpdates) : 0){
 						nextLocation = getLocation(nextLocIndex++);
-						var p:SpawnableEntity = prePool.checkOut();
+						var p:SpawnableEntity = FP.world.create(preSpawnClass) as SpawnableEntity;
 						var f:Function = function():void {
-							world.remove(p);
-							prePool.checkIn(p);
+							FP.world.recycle(p);
 						};
-
 						p.spawn(f, nextLocation);
-						world.add(p as Entity);
 					}
 				}
 
@@ -104,10 +89,11 @@ package com.auxiliumgames.base.spawn {
 					updatesSinceLastSpawn = 0;
 					currentlySpawned++;
 					numSpawnedThisWave++;
-					var s:SpawnableEntity = pool.checkOut();
+					var s:SpawnableEntity = FP.world.create(spawnClass)  as SpawnableEntity;
+					if (entityType == null)
+						entityType = s.type;
 					var c:Function = function():void {
-						world.remove(s);
-						pool.checkIn(s);
+						FP.world.recycle(s);
 						currentlySpawned--;
 					};
 					//if this is null then we will need to
@@ -115,9 +101,8 @@ package com.auxiliumgames.base.spawn {
 					//if it is not null then we should be able
 					//to assume that the nextLocation was updated
 					//when we spawned the last prespawner
-					if(createNewPreSpawner == null)
+					if(preSpawnClass == null)
 						nextLocation = getLocation(nextLocIndex++);
-					world.add(s);
 					s.spawn(c, nextLocation);
 				}
 			}
@@ -160,12 +145,14 @@ package com.auxiliumgames.base.spawn {
 		 * 
 		 */
 		public function clearAll():void {
-			var ents:Vector.<Entity> = new Vector.<Entity>();
-			world.getType(entityType, ents);
-			clearing = true;
-			for (var i:int = 0; i < ents.length; i++) {
-				var s:SpawnableEntity = ents[i] as SpawnableEntity;
-				s.forceComplete();
+			if (entityType) {
+				var ents:Vector.<Entity> = new Vector.<Entity>();
+				FP.world.getType(entityType, ents);
+				clearing = true;
+				for (var i:int = 0; i < ents.length; i++) {
+					var s:SpawnableEntity = ents[i] as SpawnableEntity;
+					s.forceComplete();
+				}
 			}
 		}
 		

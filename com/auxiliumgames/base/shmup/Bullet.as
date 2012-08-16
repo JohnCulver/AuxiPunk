@@ -5,6 +5,7 @@ package com.auxiliumgames.base.shmup
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
@@ -17,7 +18,6 @@ package com.auxiliumgames.base.shmup
 		private var updateMyLocation:Function;
 		private var amIdead:Function;
 		private var updateCount:Number;
-		private var whenIamDead:Function;
 		private var forcedToBeClear:Boolean;
 		private var image:Image;
 		
@@ -36,20 +36,17 @@ package com.auxiliumgames.base.shmup
 		 * @param	amIdead				We will pass the bullet and the number of updates to this function to determine if
 		 * 								the bullet has come to an end.
 		 * 
-		 * @param	whenIamDead			A method we will call, passing the bullet and the world it is attached to when the 
-		 * 								bullet comes to an end.
 		 * 
 		 * @param	image				The graphic of the bullet.
 		 * @param	hitBox				The hitbox used for collision.
 		 * @param	layer				The layer for the bullet.
 		 * @param	type				The type used for collision.
 		 */
-		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, whenIamDead:Function, image:Image, hitBox:Rectangle, layer:uint, type:String = "bullet"):void {
+		public function spawn(startx:Number, starty:Number, updateMyLocation:Function, amIdead:Function, image:Image, hitBox:Rectangle, layer:uint, type:String = "bullet"):void {
 			x = startx;
 			y = starty;
 			this.updateMyLocation = updateMyLocation;
 			this.amIdead = amIdead;
-			this.whenIamDead = whenIamDead;
 			this.image = image;
 			setHitboxTo(hitBox);
 			this.type = type;
@@ -66,8 +63,8 @@ package com.auxiliumgames.base.shmup
 		 */
 		override public function update():void {
 			if (amIdead(this,updateCount) || forcedToBeClear) {
-				whenIamDead(this,world);
 				this.collidable = false;
+				FP.world.recycle(this);
 				return;
 			}
 			updateMyLocation(this, updateCount);	

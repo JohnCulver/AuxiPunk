@@ -24,7 +24,7 @@ package com.auxiliumgames.base.example {
 		
 		public function SpawnExampleWorld() {
 			continuous = true; //change this to false for testing a set amount
-			spawner = new Spawner(this,newSpawner,"see",100,newPreSpawner,10);
+			spawner = new Spawner(SpawnExampleEntity,SpawnExamplePrespawnEntity,10);
 			FP.screen.color = 0xffffff;
 			spawner.newWave(20, 5, continuous, locFunc);
 			FP.console.enable();
@@ -37,15 +37,6 @@ package com.auxiliumgames.base.example {
 			if (i > 10) 
 				i = 0; 
 			return new Point(i * 50, i * 50);
-		}
-		
-		//this will be the function we pass to create a new one
-		private function newSpawner():SpawnExampleEntity{
-			return new SpawnExampleEntity();
-		}
-		//to create a new pre spawner
-		private function newPreSpawner():SpawnExamplePrespawnEntity {
-			return new SpawnExamplePrespawnEntity();
 		}
 		
 		override public function update():void {

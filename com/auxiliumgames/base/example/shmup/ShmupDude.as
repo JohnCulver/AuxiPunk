@@ -87,7 +87,7 @@ package com.auxiliumgames.base.example.shmup {
 			//throttle the firing
 			if (cantFireTime <= 0) {
 				if (input.isFocused()) {
-					BulletPatternManager.fire("ring1",world,x,y);
+					BulletPatternManager.fire("ring1",x,y);
 					cantFireTime = 10;
 				}
 			}

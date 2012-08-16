@@ -11,6 +11,7 @@ package com.auxiliumgames.base.example.shmup {
 		
 		public function ShmupTestWorld() {
 			FP.screen.color = 0xFFFFFF;
+			FP.console.enable();
 			dude = new ShmupDude();
 			dude.x = 40;
 			dude.y = 200;

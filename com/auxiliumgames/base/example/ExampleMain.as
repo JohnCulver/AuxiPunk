@@ -26,8 +26,8 @@ import net.flashpunk.utils.Key;
 
 		private function go(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			FP.world = new ShmupTestWorld();
-			//FP.world = new PlatformerLevelTestWorld();
+			//FP.world = new ShmupTestWorld();
+			FP.world = new PlatformerLevelTestWorld();
 			//FP.world = new BulletPatternManagerTestWorld();
 			//FP.world = new SpawnExampleWorld();
             //FP.world = new PartitionExampleWorld();
