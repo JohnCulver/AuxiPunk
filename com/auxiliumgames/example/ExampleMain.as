@@ -1,6 +1,7 @@
 package com.auxiliumgames.example{
 import com.auxiliumgames.example.display.BarTestWorld;
 import com.auxiliumgames.example.display.DialogExampleWorld;
+import com.auxiliumgames.example.display.FullScreenColorTestWorld;
 import com.auxiliumgames.example.lighting.LightWorldExample;
 import com.auxiliumgames.example.platformer.PlatformerLevelTestWorld;
 import com.auxiliumgames.example.screen.PartitionExampleWorld;
@@ -29,7 +30,7 @@ import net.flashpunk.utils.Key;
 		}
 
 		private function go(e:Event = null):void {
-			FP.world = new ShmupTestWorld();
+			//FP.world = new ShmupTestWorld();
 			//FP.world = new PlatformerLevelTestWorld();
 			//FP.world = new BulletPatternManagerTestWorld();
 			//FP.world = new SpawnExampleWorld();
@@ -38,6 +39,7 @@ import net.flashpunk.utils.Key;
 			//FP.world =  new DialogExampleWorld();
 			//FP.world = new BarTestWorld();
 			//FP.world = new ScreenShakeTestWorld();
+			FP.world = new FullScreenColorTestWorld();
 		}
 
         override public function update():void{
