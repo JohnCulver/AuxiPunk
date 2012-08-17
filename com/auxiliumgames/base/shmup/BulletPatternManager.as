@@ -1,5 +1,4 @@
 package com.auxiliumgames.base.shmup {
-	import com.auxiliumgames.base.CappedObjectPool;
 	import com.auxiliumgames.base.Config;
 	import com.auxiliumgames.base.Utils;
 	import flash.utils.Dictionary;

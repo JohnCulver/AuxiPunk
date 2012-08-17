@@ -1,5 +1,4 @@
 package com.auxiliumgames.base.spawn {
-	import com.auxiliumgames.base.CappedObjectPool;
 	import flash.geom.Point;
 	import net.flashpunk.FP;
 

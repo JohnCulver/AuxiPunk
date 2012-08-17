@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.shmup 	
 {
-	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
+	import com.auxiliumgames.example.assets.tex.TEXTURES;
 	import com.auxiliumgames.base.Utils;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;

@@ -1,6 +1,6 @@
 package com.auxiliumgames.base.lighting {
 	import com.auxiliumgames.base.Config;
-	import com.auxiliumgames.base.example.assets.tex.TEXTURES;
+	import com.auxiliumgames.example.assets.tex.TEXTURES;
 	import flash.display.BlendMode;
 	import flash.geom.Rectangle;
 	import net.flashpunk.Entity;
