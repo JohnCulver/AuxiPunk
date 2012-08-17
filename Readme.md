@@ -14,6 +14,7 @@
  * periodic "spawning" (waves)
  * screen shaking
  * screen partitioning 
+ * examples/demos of everything mentioned above (see ExampleMain)
  * etc!
 
 AuxiPunk is built on top of [FlashPunk](https://github.com/Draknek/FlashPunk "FlashPunk"). The FlashPunk license can be found by [Clicking Here](https://github.com/Draknek/FlashPunk/blob/master/license.txt "FlashPunk License")
