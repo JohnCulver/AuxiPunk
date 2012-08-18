@@ -72,7 +72,7 @@ package com.auxiliumgames.example.shmup {
 			//to manage the position based on the input
 			posMan = new ShmupPositionManager();
 			//ketboard input
-			input = new ShmupDudeInput();
+			input = new ShmupKeyboardInput();
 			//configure the position manager
 			posMan.setBaseVelocity(5);
 			posMan.setCricularVelocity(true);
@@ -104,34 +104,5 @@ package com.auxiliumgames.example.shmup {
             else
                 image.play("rest");
 		}
-	}
-}
-import com.auxiliumgames.base.shmup.ShmupInput;
-import net.flashpunk.utils.Input;
-import net.flashpunk.utils.Key;
-
-/**
- * A Keyboard implementation of the shmupinput
- * @author jculver
- */
-class ShmupDudeInput implements ShmupInput {
-	public function pressingUp():Boolean {
-		return Input.check(Key.UP);
-	}
-	
-	public function pressingDown():Boolean {
-		return Input.check(Key.DOWN);
-	}
-	
-	public function pressingLeft():Boolean {
-		return Input.check(Key.LEFT);
-	}
-	
-	public function pressingRight():Boolean {
-		return Input.check(Key.RIGHT);
-	}
-
-	public  function isFocused():Boolean{
-		return Input.check(Key.Z);
 	}
 }
